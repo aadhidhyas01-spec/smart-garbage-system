@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="ai_camera">
+    <static>true</static>
+    <link name="pole">
+      <pose>0 0 1.5 0 0 0</pose>
+      <visual name="visual">
+        <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+        <material><ambient>0.5 0.5 0.5 1</ambient></material>
+      </visual>
+      <collision name="collision">
+        <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+      </collision>
+    </link>
+    <link name="camera_box">
+      <pose>0.1 0 2.8 0 0.5 0</pose>
+      <visual name="visual">
+        <geometry><box><size>0.2 0.2 0.1</size></box></geometry>
+        <material><ambient>0.8 0.8 0.8 1</ambient></material>
+      </visual>
+      <!-- Real camera sensor could be added here later -->
+    </link>
+    <link name="solar_panel">
+      <pose>0 0 3.0 0 -0.5 0</pose>
+      <visual name="visual">
+        <geometry><box><size>0.6 0.4 0.02</size></box></geometry>
+        <material><ambient>0.1 0.1 0.8 1</ambient></material>
+      </visual>
+    </link>
+  </model>
+</sdf>

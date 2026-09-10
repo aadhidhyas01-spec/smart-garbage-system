@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="dustbin">
+    <static>true</static>
+    <link name="link">
+      
+      <!-- ================= TAPERED RECTANGULAR BODY ================= -->
+      <!-- Lower Body Section (Municipal Green) -->
+      <visual name="bin_body_lower">
+        <pose>0 0 0.35 0 0 0</pose>
+        <geometry><box><size>0.48 0.48 0.55</size></box></geometry>
+        <material>
+          <ambient>0.12 0.46 0.16 1</ambient>
+          <diffuse>0.16 0.55 0.22 1</diffuse>
+          <specular>0.25 0.25 0.25 1</specular>
+        </material>
+      </visual>
+
+      <!-- Upper Body Section (Slightly Wider Taper) -->
+      <visual name="bin_body_upper">
+        <pose>0 0 0.72 0 0 0</pose>
+        <geometry><box><size>0.56 0.56 0.35</size></box></geometry>
+        <material>
+          <ambient>0.12 0.46 0.16 1</ambient>
+          <diffuse>0.16 0.55 0.22 1</diffuse>
+          <specular>0.25 0.25 0.25 1</specular>
+        </material>
+      </visual>
+
+      <!-- Top Reinforced Molding Rim / Collar -->
+      <visual name="bin_top_rim">
+        <pose>0 0 0.90 0 0 0</pose>
+        <geometry><box><size>0.60 0.60 0.08</size></box></geometry>
+        <material>
+          <ambient>0.10 0.40 0.14 1</ambient>
+          <diffuse>0.14 0.48 0.18 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
+      </visual>
+
+      <!-- Interior Bag Cavity (Dark Depth Shadow) -->
+      <visual name="bin_inner_cavity">
+        <pose>0 0 0.91 0 0 0</pose>
+        <geometry><box><size>0.50 0.50 0.02</size></box></geometry>
+        <material><ambient>0.04 0.04 0.04 1</ambient></material>
+      </visual>
+
+      <!-- ================= HINGED LID & HANDLES ================= -->
+      <!-- Contoured Green Lid (Open to Reveal Garbage Bag) -->
+      <visual name="bin_lid">
+        <pose>0 0.26 0.98 -0.45 0 0</pose>
+        <geometry><box><size>0.62 0.45 0.04</size></box></geometry>
+        <material>
+          <ambient>0.10 0.42 0.14 1</ambient>
+          <diffuse>0.14 0.50 0.18 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+
+      <!-- Lid Handle Lip -->
+      <visual name="bin_lid_handle">
+        <pose>0 0.12 1.12 -0.45 0 0</pose>
+        <geometry><box><size>0.26 0.05 0.03</size></box></geometry>
+        <material><ambient>0.06 0.28 0.08 1</ambient></material>
+      </visual>
+
+      <!-- Rear Hinge Pivot Bar -->
+      <visual name="bin_hinge_bar">
+        <pose>0 0.29 0.92 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.58</length></cylinder></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+
+      <!-- Rear Push Handle -->
+      <visual name="bin_rear_handle">
+        <pose>0 0.32 0.88 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.022</radius><length>0.48</length></cylinder></geometry>
+        <material><ambient>0.12 0.12 0.14 1</ambient></material>
+      </visual>
+      <visual name="bin_rear_handle_bracket_left">
+        <pose>-0.24 0.30 0.88 0 0 0</pose>
+        <geometry><box><size>0.03 0.07 0.03</size></box></geometry>
+        <material><ambient>0.10 0.40 0.14 1</ambient></material>
+      </visual>
+      <visual name="bin_rear_handle_bracket_right">
+        <pose>0.24 0.30 0.88 0 0 0</pose>
+        <geometry><box><size>0.03 0.07 0.03</size></box></geometry>
+        <material><ambient>0.10 0.40 0.14 1</ambient></material>
+      </visual>
+
+      <!-- Side Lifting Trunnions (Municipal Automated Tipper Mounts) -->
+      <visual name="bin_trunnion_left">
+        <pose>-0.30 0 0.75 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.025</radius><length>0.06</length></cylinder></geometry>
+        <material><ambient>0.2 0.2 0.22 1</ambient></material>
+      </visual>
+      <visual name="bin_trunnion_right">
+        <pose>0.30 0 0.75 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.025</radius><length>0.06</length></cylinder></geometry>
+        <material><ambient>0.2 0.2 0.22 1</ambient></material>
+      </visual>
+
+      <!-- ================= RECYCLING EMBLEM ================= -->
+      <!-- White Circular Backplate on Front -->
+      <visual name="bin_logo_plate">
+        <pose>0 -0.282 0.60 0 0 0</pose>
+        <geometry><box><size>0.24 0.005 0.24</size></box></geometry>
+        <material>
+          <ambient>0.08 0.38 0.12 1</ambient>
+          <diffuse>0.10 0.44 0.15 1</diffuse>
+        </material>
+      </visual>
+      <!-- Crisp White Universal Recycling Symbol Overlay -->
+      <visual name="bin_recycle_arrow1">
+        <pose>0 -0.285 0.66 0 0 0</pose>
+        <geometry><box><size>0.12 0.004 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
+      </visual>
+      <visual name="bin_recycle_arrow2">
+        <pose>-0.05 -0.285 0.58 0 0 -1.05</pose>
+        <geometry><box><size>0.12 0.004 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
+      </visual>
+      <visual name="bin_recycle_arrow3">
+        <pose>0.05 -0.285 0.58 0 0 1.05</pose>
+        <geometry><box><size>0.12 0.004 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
+      </visual>
+
+      <!-- ================= WHEELS & RUNNING GEAR ================= -->
+      <!-- Rear Axle Rod -->
+      <visual name="bin_axle">
+        <pose>0 0.24 0.11 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.015</radius><length>0.54</length></cylinder></geometry>
+        <material><ambient>0.3 0.3 0.32 1</ambient></material>
+      </visual>
+
+      <!-- Left Wheel Rubber Tire -->
+      <visual name="bin_wheel_left_tire">
+        <pose>-0.27 0.24 0.11 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.11</radius><length>0.05</length></cylinder></geometry>
+        <material>
+          <ambient>0.10 0.10 0.12 1</ambient>
+          <diffuse>0.12 0.12 0.14 1</diffuse>
+        </material>
+      </visual>
+      <!-- Left Wheel Silver Hubcap -->
+      <visual name="bin_wheel_left_hub">
+        <pose>-0.298 0.24 0.11 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.01</length></cylinder></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+
+      <!-- Right Wheel Rubber Tire -->
+      <visual name="bin_wheel_right_tire">
+        <pose>0.27 0.24 0.11 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.11</radius><length>0.05</length></cylinder></geometry>
+        <material>
+          <ambient>0.10 0.10 0.12 1</ambient>
+          <diffuse>0.12 0.12 0.14 1</diffuse>
+        </material>
+      </visual>
+      <!-- Right Wheel Silver Hubcap -->
+      <visual name="bin_wheel_right_hub">
+        <pose>0.298 0.24 0.11 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.01</length></cylinder></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+
+      <!-- Front Resting Feet (Ground Stabilizer Pads) -->
+      <visual name="bin_foot_left">
+        <pose>-0.18 -0.18 0.05 0 0 0</pose>
+        <geometry><box><size>0.08 0.08 0.10</size></box></geometry>
+        <material><ambient>0.10 0.38 0.14 1</ambient></material>
+      </visual>
+      <visual name="bin_foot_right">
+        <pose>0.18 -0.18 0.05 0 0 0</pose>
+        <geometry><box><size>0.08 0.08 0.10</size></box></geometry>
+        <material><ambient>0.10 0.38 0.14 1</ambient></material>
+      </visual>
+
+      <!-- ================= COLLISION BOUNDS ================= -->
+      <collision name="collision_body">
+        <pose>0 0 0.50 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 1.0</size></box></geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

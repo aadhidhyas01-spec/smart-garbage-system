@@ -1,0 +1,700 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="house">
+    <static>true</static>
+    
+    <!-- MAIN HOUSE STRUCTURE -->
+    <link name="house_structure">
+      
+      <!-- ================= FOUNDATION & PLINTH ================= -->
+      <!-- Plinth Base Slab (Elevated Foundation) -->
+      <visual name="plinth_base">
+        <pose>0 -0.2 0.15 0 0 0</pose>
+        <geometry><box><size>7.6 7.6 0.3</size></box></geometry>
+        <material>
+          <ambient>0.28 0.28 0.30 1</ambient>
+          <diffuse>0.35 0.35 0.38 1</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+
+      <!-- Entrance Porch Steps -->
+      <visual name="porch_step_1">
+        <pose>0.2 -4.3 0.1 0 0 0</pose>
+        <geometry><box><size>2.2 0.8 0.2</size></box></geometry>
+        <material>
+          <ambient>0.25 0.25 0.27 1</ambient>
+          <diffuse>0.32 0.32 0.35 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
+      </visual>
+      <visual name="porch_step_2">
+        <pose>0.2 -4.8 0.05 0 0 0</pose>
+        <geometry><box><size>2.4 0.6 0.1</size></box></geometry>
+        <material>
+          <ambient>0.22 0.22 0.24 1</ambient>
+          <diffuse>0.30 0.30 0.32 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
+      </visual>
+
+      <!-- ================= GROUND FLOOR ================= -->
+      <!-- Ground Floor Main Walls (Warm Cream / Ivory Stucco) -->
+      <visual name="gf_main_walls">
+        <pose>0 0 1.8 0 0 0</pose>
+        <geometry><box><size>6.8 6.8 3.0</size></box></geometry>
+        <material>
+          <ambient>0.94 0.91 0.84 1</ambient>
+          <diffuse>0.95 0.92 0.86 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+
+      <!-- Ground Floor Accent Feature Wall (Warm Terracotta Brick / Stone) -->
+      <visual name="gf_accent_wall">
+        <pose>-2.3 -3.42 1.8 0 0 0</pose>
+        <geometry><box><size>2.0 0.06 3.0</size></box></geometry>
+        <material>
+          <ambient>0.72 0.28 0.16 1</ambient>
+          <diffuse>0.78 0.32 0.18 1</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+
+      <!-- Front Entrance Verandah / Portico Slab -->
+      <visual name="portico_roof">
+        <pose>0.2 -3.9 3.2 0 0 0</pose>
+        <geometry><box><size>2.6 1.4 0.2</size></box></geometry>
+        <material>
+          <ambient>0.92 0.92 0.92 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Portico White Architectural Columns -->
+      <visual name="portico_pillar_left">
+        <pose>-0.9 -4.4 1.7 0 0 0</pose>
+        <geometry><box><size>0.25 0.25 2.8</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1</ambient>
+          <diffuse>0.98 0.98 0.98 1</diffuse>
+        </material>
+      </visual>
+      <visual name="portico_pillar_right">
+        <pose>1.3 -4.4 1.7 0 0 0</pose>
+        <geometry><box><size>0.25 0.25 2.8</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1</ambient>
+          <diffuse>0.98 0.98 0.98 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Front Main Entrance Door (Polished Teak Wood) -->
+      <visual name="front_door_frame">
+        <pose>0.2 -3.42 1.5 0 0 0</pose>
+        <geometry><box><size>1.3 0.08 2.4</size></box></geometry>
+        <material>
+          <ambient>0.22 0.12 0.05 1</ambient>
+          <diffuse>0.28 0.15 0.07 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_door_panel">
+        <pose>0.2 -3.44 1.45 0 0 0</pose>
+        <geometry><box><size>1.1 0.05 2.2</size></box></geometry>
+        <material>
+          <ambient>0.48 0.25 0.10 1</ambient>
+          <diffuse>0.54 0.29 0.12 1</diffuse>
+          <specular>0.3 0.2 0.1 1</specular>
+        </material>
+      </visual>
+      <visual name="front_door_handle">
+        <pose>0.65 -3.48 1.4 0 0 0</pose>
+        <geometry><cylinder><radius>0.025</radius><length>0.12</length></cylinder></geometry>
+        <material>
+          <ambient>0.85 0.72 0.25 1</ambient>
+          <diffuse>0.90 0.80 0.30 1</diffuse>
+          <specular>0.8 0.8 0.5 1</specular>
+        </material>
+      </visual>
+      <!-- Porch Wall Light Fixture -->
+      <visual name="porch_light">
+        <pose>-0.6 -3.44 2.2 0 0 0</pose>
+        <geometry><box><size>0.15 0.12 0.25</size></box></geometry>
+        <material>
+          <ambient>1.0 0.9 0.6 1</ambient>
+          <diffuse>1.0 0.9 0.7 1</diffuse>
+          <emissive>0.6 0.5 0.2 1</emissive>
+        </material>
+      </visual>
+
+      <!-- Ground Floor Windows & Weather Sunshades (Chajjas) -->
+      <!-- Left Picture Window Frame -->
+      <visual name="gf_window_left_frame">
+        <pose>-2.2 -3.42 1.8 0 0 0</pose>
+        <geometry><box><size>1.5 0.06 1.4</size></box></geometry>
+        <material>
+          <ambient>0.15 0.15 0.18 1</ambient>
+          <diffuse>0.18 0.18 0.20 1</diffuse>
+        </material>
+      </visual>
+      <!-- Left Window Tinted Glass -->
+      <visual name="gf_window_left_glass">
+        <pose>-2.2 -3.43 1.8 0 0 0</pose>
+        <geometry><box><size>1.35 0.02 1.25</size></box></geometry>
+        <material>
+          <ambient>0.15 0.28 0.38 0.9</ambient>
+          <diffuse>0.20 0.35 0.48 0.9</diffuse>
+          <specular>0.85 0.90 0.95 1</specular>
+        </material>
+      </visual>
+      <!-- Left Window Sunshade (Chajja) -->
+      <visual name="gf_window_left_chajja">
+        <pose>-2.2 -3.65 2.58 0 0 0</pose>
+        <geometry><box><size>1.8 0.5 0.08</size></box></geometry>
+        <material>
+          <ambient>0.92 0.92 0.92 1</ambient>
+          <diffuse>0.96 0.96 0.96 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Right Window Frame -->
+      <visual name="gf_window_right_frame">
+        <pose>2.3 -3.42 1.8 0 0 0</pose>
+        <geometry><box><size>1.4 0.06 1.4</size></box></geometry>
+        <material>
+          <ambient>0.15 0.15 0.18 1</ambient>
+          <diffuse>0.18 0.18 0.20 1</diffuse>
+        </material>
+      </visual>
+      <!-- Right Window Tinted Glass -->
+      <visual name="gf_window_right_glass">
+        <pose>2.3 -3.43 1.8 0 0 0</pose>
+        <geometry><box><size>1.25 0.02 1.25</size></box></geometry>
+        <material>
+          <ambient>0.15 0.28 0.38 0.9</ambient>
+          <diffuse>0.20 0.35 0.48 0.9</diffuse>
+          <specular>0.85 0.90 0.95 1</specular>
+        </material>
+      </visual>
+      <!-- Right Window Sunshade -->
+      <visual name="gf_window_right_chajja">
+        <pose>2.3 -3.65 2.58 0 0 0</pose>
+        <geometry><box><size>1.6 0.5 0.08</size></box></geometry>
+        <material>
+          <ambient>0.92 0.92 0.92 1</ambient>
+          <diffuse>0.96 0.96 0.96 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- East Side Windows -->
+      <visual name="side_east_window_frame">
+        <pose>3.42 0 1.8 0 0 0</pose>
+        <geometry><box><size>0.06 1.6 1.3</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="side_east_window_glass">
+        <pose>3.43 0 1.8 0 0 0</pose>
+        <geometry><box><size>0.02 1.45 1.15</size></box></geometry>
+        <material>
+          <ambient>0.15 0.28 0.38 0.9</ambient>
+          <diffuse>0.20 0.35 0.48 0.9</diffuse>
+          <specular>0.8 0.85 0.9 1</specular>
+        </material>
+      </visual>
+      <visual name="side_east_window_chajja">
+        <pose>3.65 0 2.55 0 0 0</pose>
+        <geometry><box><size>0.5 1.8 0.08</size></box></geometry>
+        <material><ambient>0.92 0.92 0.92 1</ambient></material>
+      </visual>
+
+      <!-- West Side Windows -->
+      <visual name="side_west_window_frame">
+        <pose>-3.42 0 1.8 0 0 0</pose>
+        <geometry><box><size>0.06 1.6 1.3</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="side_west_window_glass">
+        <pose>-3.43 0 1.8 0 0 0</pose>
+        <geometry><box><size>0.02 1.45 1.15</size></box></geometry>
+        <material>
+          <ambient>0.15 0.28 0.38 0.9</ambient>
+          <diffuse>0.20 0.35 0.48 0.9</diffuse>
+          <specular>0.8 0.85 0.9 1</specular>
+        </material>
+      </visual>
+      <visual name="side_west_window_chajja">
+        <pose>-3.65 0 2.55 0 0 0</pose>
+        <geometry><box><size>0.5 1.8 0.08</size></box></geometry>
+        <material><ambient>0.92 0.92 0.92 1</ambient></material>
+      </visual>
+
+      <!-- Floor Separation Cornice Band (Horizontal White Architectural Molding) -->
+      <visual name="floor_cornice_band">
+        <pose>0 -0.05 3.35 0 0 0</pose>
+        <geometry><box><size>7.0 7.0 0.18</size></box></geometry>
+        <material>
+          <ambient>0.96 0.96 0.96 1</ambient>
+          <diffuse>0.98 0.98 0.98 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- ================= FIRST FLOOR & BALCONY ================= -->
+      <!-- First Floor Main Walls -->
+      <visual name="ff_main_walls">
+        <pose>0 0.1 4.75 0 0 0</pose>
+        <geometry><box><size>6.8 6.6 2.6</size></box></geometry>
+        <material>
+          <ambient>0.94 0.91 0.84 1</ambient>
+          <diffuse>0.95 0.92 0.86 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- First Floor Accent Panel (Terracotta) -->
+      <visual name="ff_accent_wall">
+        <pose>-2.3 -3.22 4.75 0 0 0</pose>
+        <geometry><box><size>2.0 0.06 2.6</size></box></geometry>
+        <material>
+          <ambient>0.72 0.28 0.16 1</ambient>
+          <diffuse>0.78 0.32 0.18 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Cantilevered First-Floor Balcony Slab -->
+      <visual name="balcony_slab">
+        <pose>0.8 -3.8 3.4 0 0 0</pose>
+        <geometry><box><size>3.6 1.4 0.2</size></box></geometry>
+        <material>
+          <ambient>0.92 0.92 0.92 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Balcony Safety Railings (Dark Metal Grille) -->
+      <!-- Front Railing Top Handrail -->
+      <visual name="balcony_handrail_front">
+        <pose>0.8 -4.48 4.3 0 0 0</pose>
+        <geometry><box><size>3.6 0.06 0.06</size></box></geometry>
+        <material><ambient>0.12 0.12 0.15 1</ambient><diffuse>0.15 0.15 0.18 1</diffuse></material>
+      </visual>
+      <!-- Front Railing Balustrade Grille -->
+      <visual name="balcony_grille_front">
+        <pose>0.8 -4.48 3.85 0 0 0</pose>
+        <geometry><box><size>3.5 0.04 0.8</size></box></geometry>
+        <material>
+          <ambient>0.15 0.15 0.18 0.8</ambient>
+          <diffuse>0.20 0.20 0.22 0.8</diffuse>
+        </material>
+      </visual>
+      <!-- Side Railings -->
+      <visual name="balcony_handrail_left">
+        <pose>-0.98 -3.8 4.3 0 0 0</pose>
+        <geometry><box><size>0.06 1.3 0.06</size></box></geometry>
+        <material><ambient>0.12 0.12 0.15 1</ambient></material>
+      </visual>
+      <visual name="balcony_grille_left">
+        <pose>-0.98 -3.8 3.85 0 0 0</pose>
+        <geometry><box><size>0.04 1.3 0.8</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 0.8</ambient></material>
+      </visual>
+      <visual name="balcony_handrail_right">
+        <pose>2.58 -3.8 4.3 0 0 0</pose>
+        <geometry><box><size>0.06 1.3 0.06</size></box></geometry>
+        <material><ambient>0.12 0.12 0.15 1</ambient></material>
+      </visual>
+      <visual name="balcony_grille_right">
+        <pose>2.58 -3.8 3.85 0 0 0</pose>
+        <geometry><box><size>0.04 1.3 0.8</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 0.8</ambient></material>
+      </visual>
+
+      <!-- Balcony Sliding Glass French Doors -->
+      <visual name="balcony_door_frame">
+        <pose>0.8 -3.22 4.5 0 0 0</pose>
+        <geometry><box><size>1.8 0.06 2.0</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="balcony_door_glass">
+        <pose>0.8 -3.23 4.5 0 0 0</pose>
+        <geometry><box><size>1.65 0.02 1.85</size></box></geometry>
+        <material>
+          <ambient>0.15 0.28 0.38 0.9</ambient>
+          <diffuse>0.20 0.35 0.48 0.9</diffuse>
+          <specular>0.85 0.90 0.95 1</specular>
+        </material>
+      </visual>
+
+      <!-- First Floor Bedroom Window (Left side) -->
+      <visual name="ff_window_left_frame">
+        <pose>-2.2 -3.22 4.75 0 0 0</pose>
+        <geometry><box><size>1.4 0.06 1.3</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="ff_window_left_glass">
+        <pose>-2.2 -3.23 4.75 0 0 0</pose>
+        <geometry><box><size>1.25 0.02 1.15</size></box></geometry>
+        <material>
+          <ambient>0.15 0.28 0.38 0.9</ambient>
+          <diffuse>0.20 0.35 0.48 0.9</diffuse>
+          <specular>0.85 0.90 0.95 1</specular>
+        </material>
+      </visual>
+      <visual name="ff_window_left_chajja">
+        <pose>-2.2 -3.45 5.5 0 0 0</pose>
+        <geometry><box><size>1.6 0.5 0.08</size></box></geometry>
+        <material><ambient>0.92 0.92 0.92 1</ambient></material>
+      </visual>
+
+      <!-- ================= PITCHED SLOPED ROOF & TERRACE ================= -->
+      <!-- Pitched Clay Tile Front Roof Section (Authentic Mangalore Terracotta Red Tiles) -->
+      <!-- Sloped Front Tile Pitch -->
+      <visual name="roof_sloped_front">
+        <pose>0.5 -2.4 6.45 0.45 0 0</pose>
+        <geometry><box><size>4.8 2.5 0.14</size></box></geometry>
+        <material>
+          <ambient>0.72 0.22 0.12 1</ambient>
+          <diffuse>0.78 0.26 0.15 1</diffuse>
+          <specular>0.3 0.15 0.1 1</specular>
+        </material>
+      </visual>
+      <!-- Roof Ridge Cap (Terracotta Crown) -->
+      <visual name="roof_ridge_cap">
+        <pose>0.5 -1.3 6.95 0 0 0</pose>
+        <geometry><box><size>4.9 0.2 0.12</size></box></geometry>
+        <material>
+          <ambient>0.65 0.18 0.08 1</ambient>
+          <diffuse>0.72 0.22 0.10 1</diffuse>
+        </material>
+      </visual>
+      <!-- White Eaves / Fascia Board Trim -->
+      <visual name="roof_fascia_trim">
+        <pose>0.5 -3.48 5.95 0 0 0</pose>
+        <geometry><box><size>5.0 0.1 0.2</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient></material>
+      </visual>
+
+      <!-- Rooftop Terrace Main Slab -->
+      <visual name="terrace_slab">
+        <pose>0 0.1 6.1 0 0 0</pose>
+        <geometry><box><size>7.0 6.8 0.2</size></box></geometry>
+        <material>
+          <ambient>0.82 0.45 0.32 1</ambient>
+          <diffuse>0.85 0.50 0.36 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Terrace Parapet Safety Walls (with White Coping) -->
+      <!-- North Parapet (Rear) -->
+      <visual name="parapet_rear">
+        <pose>0 3.4 6.6 0 0 0</pose>
+        <geometry><box><size>6.8 0.2 0.9</size></box></geometry>
+        <material><ambient>0.94 0.91 0.84 1</ambient></material>
+      </visual>
+      <visual name="parapet_rear_coping">
+        <pose>0 3.4 7.08 0 0 0</pose>
+        <geometry><box><size>6.9 0.26 0.06</size></box></geometry>
+        <material><ambient>0.96 0.96 0.96 1</ambient></material>
+      </visual>
+      <!-- East Parapet (Right) -->
+      <visual name="parapet_east">
+        <pose>3.4 0.1 6.6 0 0 0</pose>
+        <geometry><box><size>0.2 6.6 0.9</size></box></geometry>
+        <material><ambient>0.94 0.91 0.84 1</ambient></material>
+      </visual>
+      <visual name="parapet_east_coping">
+        <pose>3.4 0.1 7.08 0 0 0</pose>
+        <geometry><box><size>0.26 6.7 0.06</size></box></geometry>
+        <material><ambient>0.96 0.96 0.96 1</ambient></material>
+      </visual>
+      <!-- West Parapet (Left) -->
+      <visual name="parapet_west">
+        <pose>-3.4 0.1 6.6 0 0 0</pose>
+        <geometry><box><size>0.2 6.6 0.9</size></box></geometry>
+        <material><ambient>0.94 0.91 0.84 1</ambient></material>
+      </visual>
+      <visual name="parapet_west_coping">
+        <pose>-3.4 0.1 7.08 0 0 0</pose>
+        <geometry><box><size>0.26 6.7 0.06</size></box></geometry>
+        <material><ambient>0.96 0.96 0.96 1</ambient></material>
+      </visual>
+
+      <!-- Staircase Headroom Cabin (Mumty Tower on Terrace) -->
+      <visual name="mumty_tower">
+        <pose>-2.0 1.8 7.3 0 0 0</pose>
+        <geometry><box><size>2.4 2.6 2.2</size></box></geometry>
+        <material>
+          <ambient>0.94 0.91 0.84 1</ambient>
+          <diffuse>0.95 0.92 0.86 1</diffuse>
+        </material>
+      </visual>
+      <!-- Mumty Roof Canopy -->
+      <visual name="mumty_roof">
+        <pose>-2.0 1.8 8.45 0 0 0</pose>
+        <geometry><box><size>2.7 2.9 0.15</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient></material>
+      </visual>
+      <!-- Terrace Mumty Door -->
+      <visual name="mumty_door">
+        <pose>-0.78 1.8 7.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.9 1.9</size></box></geometry>
+        <material><ambient>0.28 0.18 0.12 1</ambient></material>
+      </visual>
+
+      <!-- Overhead Water Tank (Sintex-Style Cylindrical Tank) -->
+      <!-- Tank Masonry Pedestal Base -->
+      <visual name="tank_pedestal">
+        <pose>1.8 1.8 6.45 0 0 0</pose>
+        <geometry><box><size>1.6 1.6 0.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.38 1</ambient></material>
+      </visual>
+      <!-- Tank Cylindrical Body (Deep Poly Blue/Black) -->
+      <visual name="tank_body">
+        <pose>1.8 1.8 7.35 0 0 0</pose>
+        <geometry><cylinder><radius>0.65</radius><length>1.3</length></cylinder></geometry>
+        <material>
+          <ambient>0.06 0.12 0.22 1</ambient>
+          <diffuse>0.08 0.16 0.28 1</diffuse>
+          <specular>0.4 0.4 0.5 1</specular>
+        </material>
+      </visual>
+      <!-- Tank Cap / Top Lid -->
+      <visual name="tank_lid">
+        <pose>1.8 1.8 8.04 0 0 0</pose>
+        <geometry><cylinder><radius>0.35</radius><length>0.08</length></cylinder></geometry>
+        <material><ambient>0.04 0.08 0.14 1</ambient></material>
+      </visual>
+
+      <!-- Rooftop Solar Panel Array -->
+      <visual name="solar_panel_stand">
+        <pose>1.6 -0.8 6.5 0 0 0</pose>
+        <geometry><box><size>1.6 0.08 0.6</size></box></geometry>
+        <material><ambient>0.4 0.4 0.4 1</ambient></material>
+      </visual>
+      <visual name="solar_panel_glass">
+        <pose>1.6 -1.1 6.8 -0.5 0 0</pose>
+        <geometry><box><size>1.8 1.4 0.05</size></box></geometry>
+        <material>
+          <ambient>0.08 0.14 0.28 1</ambient>
+          <diffuse>0.12 0.20 0.38 1</diffuse>
+          <specular>0.9 0.9 0.95 1</specular>
+        </material>
+      </visual>
+
+      <!-- ================= FRONT YARD & LANDSCAPING ================= -->
+      <!-- Front Yard Base Soil / Paver Pad -->
+      <visual name="yard_base">
+        <pose>0 -5.6 0.01 0 0 0</pose>
+        <geometry><box><size>11.0 4.0 0.02</size></box></geometry>
+        <material><ambient>0.3 0.3 0.3 1</ambient></material>
+      </visual>
+
+      <!-- Green Lawn Patches (Left Garden Bed) -->
+      <visual name="lawn_left">
+        <pose>-3.2 -5.6 0.02 0 0 0</pose>
+        <geometry><box><size>4.2 3.8 0.03</size></box></geometry>
+        <material>
+          <ambient>0.18 0.52 0.14 1</ambient>
+          <diffuse>0.24 0.62 0.18 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Green Lawn Patches (Right Garden Bed) -->
+      <visual name="lawn_right">
+        <pose>3.2 -5.6 0.02 0 0 0</pose>
+        <geometry><box><size>4.2 3.8 0.03</size></box></geometry>
+        <material>
+          <ambient>0.18 0.52 0.14 1</ambient>
+          <diffuse>0.24 0.62 0.18 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Central Paved Stone Driveway / Walkway -->
+      <visual name="driveway_pavers">
+        <pose>0.2 -5.6 0.03 0 0 0</pose>
+        <geometry><box><size>2.2 3.8 0.03</size></box></geometry>
+        <material>
+          <ambient>0.45 0.45 0.47 1</ambient>
+          <diffuse>0.52 0.52 0.55 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
+      </visual>
+
+      <!-- Entrance Ornamental Shrubs / Potted Plants -->
+      <visual name="shrub_pot_left">
+        <pose>-1.4 -4.8 0.2 0 0 0</pose>
+        <geometry><cylinder><radius>0.25</radius><length>0.4</length></cylinder></geometry>
+        <material><ambient>0.65 0.25 0.12 1</ambient></material>
+      </visual>
+      <visual name="shrub_green_left">
+        <pose>-1.4 -4.8 0.6 0 0 0</pose>
+        <geometry><sphere><radius>0.35</radius></sphere></geometry>
+        <material><ambient>0.12 0.55 0.15 1</ambient></material>
+      </visual>
+      <visual name="shrub_pot_right">
+        <pose>1.8 -4.8 0.2 0 0 0</pose>
+        <geometry><cylinder><radius>0.25</radius><length>0.4</length></cylinder></geometry>
+        <material><ambient>0.65 0.25 0.12 1</ambient></material>
+      </visual>
+      <visual name="shrub_green_right">
+        <pose>1.8 -4.8 0.6 0 0 0</pose>
+        <geometry><sphere><radius>0.35</radius></sphere></geometry>
+        <material><ambient>0.12 0.55 0.15 1</ambient></material>
+      </visual>
+
+      <!-- ================= COMPOUND WALL & FRONT GATE ================= -->
+      <!-- Front Boundary Wall Left Section -->
+      <visual name="compound_wall_front_left">
+        <pose>-3.5 -7.4 0.6 0 0 0</pose>
+        <geometry><box><size>4.0 0.25 1.2</size></box></geometry>
+        <material>
+          <ambient>0.92 0.90 0.85 1</ambient>
+          <diffuse>0.95 0.92 0.88 1</diffuse>
+        </material>
+      </visual>
+      <visual name="compound_wall_front_left_coping">
+        <pose>-3.5 -7.4 1.22 0 0 0</pose>
+        <geometry><box><size>4.1 0.32 0.05</size></box></geometry>
+        <material><ambient>0.35 0.35 0.38 1</ambient></material>
+      </visual>
+
+      <!-- Front Boundary Wall Right Section -->
+      <visual name="compound_wall_front_right">
+        <pose>3.7 -7.4 0.6 0 0 0</pose>
+        <geometry><box><size>3.6 0.25 1.2</size></box></geometry>
+        <material>
+          <ambient>0.92 0.90 0.85 1</ambient>
+          <diffuse>0.95 0.92 0.88 1</diffuse>
+        </material>
+      </visual>
+      <visual name="compound_wall_front_right_coping">
+        <pose>3.7 -7.4 1.22 0 0 0</pose>
+        <geometry><box><size>3.7 0.32 0.05</size></box></geometry>
+        <material><ambient>0.35 0.35 0.38 1</ambient></material>
+      </visual>
+
+      <!-- Entrance Gate Pillars -->
+      <!-- Left Gate Pillar -->
+      <visual name="gate_pillar_left">
+        <pose>-1.4 -7.4 0.75 0 0 0</pose>
+        <geometry><box><size>0.5 0.5 1.5</size></box></geometry>
+        <material>
+          <ambient>0.72 0.28 0.16 1</ambient>
+          <diffuse>0.78 0.32 0.18 1</diffuse>
+        </material>
+      </visual>
+      <visual name="gate_pillar_left_cap">
+        <pose>-1.4 -7.4 1.55 0 0 0</pose>
+        <geometry><box><size>0.6 0.6 0.1</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient></material>
+      </visual>
+      <!-- House Name / Number Plaque on Left Pillar -->
+      <visual name="house_nameplate">
+        <pose>-1.4 -7.66 1.1 0 0 0</pose>
+        <geometry><box><size>0.35 0.02 0.2</size></box></geometry>
+        <material>
+          <ambient>0.85 0.72 0.25 1</ambient>
+          <diffuse>0.9 0.8 0.3 1</diffuse>
+          <specular>0.8 0.8 0.4 1</specular>
+        </material>
+      </visual>
+
+      <!-- Right Gate Pillar -->
+      <visual name="gate_pillar_right">
+        <pose>1.8 -7.4 0.75 0 0 0</pose>
+        <geometry><box><size>0.5 0.5 1.5</size></box></geometry>
+        <material>
+          <ambient>0.72 0.28 0.16 1</ambient>
+          <diffuse>0.78 0.32 0.18 1</diffuse>
+        </material>
+      </visual>
+      <visual name="gate_pillar_right_cap">
+        <pose>1.8 -7.4 1.55 0 0 0</pose>
+        <geometry><box><size>0.6 0.6 0.1</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient></material>
+      </visual>
+
+      <!-- Wrought-Iron Entrance Gate (Decorative Charcoal Steel Slats) -->
+      <visual name="main_entrance_gate">
+        <pose>0.2 -7.4 0.7 0 0 0</pose>
+        <geometry><box><size>2.6 0.06 1.3</size></box></geometry>
+        <material>
+          <ambient>0.12 0.12 0.15 1</ambient>
+          <diffuse>0.16 0.16 0.18 1</diffuse>
+          <specular>0.4 0.4 0.4 1</specular>
+        </material>
+      </visual>
+
+      <!-- Left Side Boundary Wall -->
+      <visual name="compound_wall_left">
+        <pose>-5.5 -1.2 0.6 0 0 0</pose>
+        <geometry><box><size>0.25 12.4 1.2</size></box></geometry>
+        <material><ambient>0.92 0.90 0.85 1</ambient></material>
+      </visual>
+      <!-- Right Side Boundary Wall -->
+      <visual name="compound_wall_right">
+        <pose>5.5 -1.2 0.6 0 0 0</pose>
+        <geometry><box><size>0.25 12.4 1.2</size></box></geometry>
+        <material><ambient>0.92 0.90 0.85 1</ambient></material>
+      </visual>
+      <!-- Rear Boundary Wall -->
+      <visual name="compound_wall_rear">
+        <pose>0 5.0 0.6 0 0 0</pose>
+        <geometry><box><size>11.0 0.25 1.2</size></box></geometry>
+        <material><ambient>0.92 0.90 0.85 1</ambient></material>
+      </visual>
+
+      <!-- ================= SOLID COLLISION BOUNDS ================= -->
+      <!-- Plinth Collision -->
+      <collision name="col_plinth">
+        <pose>0 -0.2 0.15 0 0 0</pose>
+        <geometry><box><size>7.6 7.6 0.3</size></box></geometry>
+      </collision>
+
+      <!-- Ground Floor Walls Collision -->
+      <collision name="col_gf">
+        <pose>0 0 1.8 0 0 0</pose>
+        <geometry><box><size>6.8 6.8 3.0</size></box></geometry>
+      </collision>
+
+      <!-- Portico Collision -->
+      <collision name="col_portico">
+        <pose>0.2 -3.9 1.7 0 0 0</pose>
+        <geometry><box><size>2.6 1.4 3.0</size></box></geometry>
+      </collision>
+
+      <!-- First Floor Walls Collision -->
+      <collision name="col_ff">
+        <pose>0 0.1 4.75 0 0 0</pose>
+        <geometry><box><size>6.8 6.6 2.6</size></box></geometry>
+      </collision>
+
+      <!-- Roof Mumty Tower Collision -->
+      <collision name="col_mumty">
+        <pose>-2.0 1.8 7.3 0 0 0</pose>
+        <geometry><box><size>2.4 2.6 2.2</size></box></geometry>
+      </collision>
+
+      <!-- Compound Boundary Wall Collisions -->
+      <collision name="col_wall_left">
+        <pose>-5.5 -1.2 0.6 0 0 0</pose>
+        <geometry><box><size>0.25 12.4 1.2</size></box></geometry>
+      </collision>
+      <collision name="col_wall_right">
+        <pose>5.5 -1.2 0.6 0 0 0</pose>
+        <geometry><box><size>0.25 12.4 1.2</size></box></geometry>
+      </collision>
+      <collision name="col_wall_rear">
+        <pose>0 5.0 0.6 0 0 0</pose>
+        <geometry><box><size>11.0 0.25 1.2</size></box></geometry>
+      </collision>
+      <collision name="col_wall_front_left">
+        <pose>-3.5 -7.4 0.6 0 0 0</pose>
+        <geometry><box><size>4.0 0.25 1.2</size></box></geometry>
+      </collision>
+      <collision name="col_wall_front_right">
+        <pose>3.7 -7.4 0.6 0 0 0</pose>
+        <geometry><box><size>3.6 0.25 1.2</size></box></geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

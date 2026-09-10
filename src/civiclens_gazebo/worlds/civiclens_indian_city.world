@@ -1,0 +1,1475 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="civiclens_indian_city">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"></plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"></plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 80 0 0 0</pose>
+      <diffuse>0.98 0.95 0.88 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <direction>-0.4 0.3 -0.85</direction>
+    </light>
+    
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>350 350</size></plane></geometry>
+        </collision>
+        <visual name="asphalt">
+          <geometry><plane><normal>0 0 1</normal><size>350 350</size></plane></geometry>
+          <material>
+            <ambient>0.22 0.22 0.24 1</ambient>
+            <diffuse>0.25 0.25 0.27 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    
+
+    <include>
+      <name>base_station</name>
+      <uri>model://base_station</uri>
+      <pose>0 -10 0 0 0 0</pose>
+    </include>
+    
+
+    <include>
+      <name>civiclens_truck</name>
+      <uri>model://civiclens_truck</uri>
+      <pose>0 -10 0.2 0 0 1.57</pose>
+    </include>
+    
+
+            <model name="sidewalk_block_0_0">
+              <static>true</static>
+              <pose>25 25 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_1</name>
+                      <uri>model://house</uri>
+                      <pose>15 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_2</name>
+                      <uri>model://house</uri>
+                      <pose>35 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_3</name>
+                      <uri>model://house</uri>
+                      <pose>15 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_4</name>
+                      <uri>model://house</uri>
+                      <pose>35 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_1">
+                  <static>true</static>
+                  <pose>25 7 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_0_1">
+              <static>true</static>
+              <pose>75 25 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_5</name>
+                      <uri>model://house</uri>
+                      <pose>65 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_6</name>
+                      <uri>model://house</uri>
+                      <pose>85 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_7</name>
+                      <uri>model://house</uri>
+                      <pose>65 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_8</name>
+                      <uri>model://house</uri>
+                      <pose>85 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_2">
+                  <static>true</static>
+                  <pose>75 7 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_0_2">
+              <static>true</static>
+              <pose>125 25 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_9</name>
+                      <uri>model://house</uri>
+                      <pose>115 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_10</name>
+                      <uri>model://house</uri>
+                      <pose>135 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_11</name>
+                      <uri>model://house</uri>
+                      <pose>115 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_12</name>
+                      <uri>model://house</uri>
+                      <pose>135 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_3">
+                  <static>true</static>
+                  <pose>125 7 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_0_3">
+              <static>true</static>
+              <pose>175 25 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_13</name>
+                      <uri>model://house</uri>
+                      <pose>165 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_14</name>
+                      <uri>model://house</uri>
+                      <pose>185 15 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_15</name>
+                      <uri>model://house</uri>
+                      <pose>165 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_16</name>
+                      <uri>model://house</uri>
+                      <pose>185 35 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_4">
+                  <static>true</static>
+                  <pose>175 7 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_1_0">
+              <static>true</static>
+              <pose>25 75 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_17</name>
+                      <uri>model://house</uri>
+                      <pose>15 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_18</name>
+                      <uri>model://house</uri>
+                      <pose>35 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_19</name>
+                      <uri>model://house</uri>
+                      <pose>15 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_20</name>
+                      <uri>model://house</uri>
+                      <pose>35 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_5">
+                  <static>true</static>
+                  <pose>25 57 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_1_1">
+              <static>true</static>
+              <pose>75 75 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_21</name>
+                      <uri>model://house</uri>
+                      <pose>65 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_22</name>
+                      <uri>model://house</uri>
+                      <pose>85 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_23</name>
+                      <uri>model://house</uri>
+                      <pose>65 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_24</name>
+                      <uri>model://house</uri>
+                      <pose>85 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_6">
+                  <static>true</static>
+                  <pose>75 57 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_1_2">
+              <static>true</static>
+              <pose>125 75 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_25</name>
+                      <uri>model://house</uri>
+                      <pose>115 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_26</name>
+                      <uri>model://house</uri>
+                      <pose>135 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_27</name>
+                      <uri>model://house</uri>
+                      <pose>115 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_28</name>
+                      <uri>model://house</uri>
+                      <pose>135 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_7">
+                  <static>true</static>
+                  <pose>125 57 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_1_3">
+              <static>true</static>
+              <pose>175 75 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_29</name>
+                      <uri>model://house</uri>
+                      <pose>165 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_30</name>
+                      <uri>model://house</uri>
+                      <pose>185 65 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_31</name>
+                      <uri>model://house</uri>
+                      <pose>165 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_32</name>
+                      <uri>model://house</uri>
+                      <pose>185 85 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_8">
+                  <static>true</static>
+                  <pose>175 57 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_2_0">
+              <static>true</static>
+              <pose>25 125 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_33</name>
+                      <uri>model://house</uri>
+                      <pose>15 115 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_34</name>
+                      <uri>model://house</uri>
+                      <pose>35 115 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_35</name>
+                      <uri>model://house</uri>
+                      <pose>15 135 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_36</name>
+                      <uri>model://house</uri>
+                      <pose>35 135 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_9">
+                  <static>true</static>
+                  <pose>25 107 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_2_1">
+              <static>true</static>
+              <pose>75 125 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_37</name>
+                      <uri>model://house</uri>
+                      <pose>65 115 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_38</name>
+                      <uri>model://house</uri>
+                      <pose>85 115 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_39</name>
+                      <uri>model://house</uri>
+                      <pose>65 135 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_40</name>
+                      <uri>model://house</uri>
+                      <pose>85 135 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_10">
+                  <static>true</static>
+                  <pose>75 107 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_2_2">
+              <static>true</static>
+              <pose>125 125 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                <model name="park_2_2">
+                  <static>true</static>
+                  <pose>125 125 0.09 0 0 0</pose>
+                  <link name="link">
+                    <visual name="grass">
+                      <geometry><box><size>38 38 0.02</size></box></geometry>
+                      <material>
+                        <ambient>0.20 0.58 0.18 1</ambient>
+                        <diffuse>0.25 0.68 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                    <!-- Park Walking Pathway -->
+                    <visual name="path_horizontal">
+                      <geometry><box><size>38 3.0 0.03</size></box></geometry>
+                      <material><ambient>0.65 0.60 0.52 1</ambient></material>
+                    </visual>
+                    <visual name="path_vertical">
+                      <geometry><box><size>3.0 38 0.03</size></box></geometry>
+                      <material><ambient>0.65 0.60 0.52 1</ambient></material>
+                    </visual>
+                    <!-- Central Gazebo Pavilion -->
+                    <visual name="central_fountain_base">
+                      <geometry><cylinder><radius>3.5</radius><length>0.4</length></cylinder></geometry>
+                      <material><ambient>0.85 0.85 0.85 1</ambient></material>
+                    </visual>
+                    <visual name="central_fountain_water">
+                      <pose>0 0 0.25 0 0 0</pose>
+                      <geometry><cylinder><radius>2.8</radius><length>0.15</length></cylinder></geometry>
+                      <material>
+                        <ambient>0.15 0.45 0.65 0.8</ambient>
+                        <diffuse>0.2 0.55 0.75 0.8</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+                        <model name="park_tree_11">
+                          <static>true</static>
+                          <pose>113 113 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_12">
+                          <static>true</static>
+                          <pose>113 137 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_13">
+                          <static>true</static>
+                          <pose>121 113 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_14">
+                          <static>true</static>
+                          <pose>121 137 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_15">
+                          <static>true</static>
+                          <pose>129 113 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_16">
+                          <static>true</static>
+                          <pose>129 137 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_17">
+                          <static>true</static>
+                          <pose>137 113 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+                        <model name="park_tree_18">
+                          <static>true</static>
+                          <pose>137 137 0.08 0 0 0</pose>
+                          <link name="link">
+                            <visual name="trunk">
+                              <pose>0 0 1.2 0 0 0</pose>
+                              <geometry><cylinder><radius>0.22</radius><length>2.4</length></cylinder></geometry>
+                              <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                            </visual>
+                            <visual name="canopy">
+                              <pose>0 0 3.0 0 0 0</pose>
+                              <geometry><sphere><radius>1.8</radius></sphere></geometry>
+                              <material>
+                                <ambient>0.15 0.52 0.15 1</ambient>
+                                <diffuse>0.20 0.60 0.20 1</diffuse>
+                              </material>
+                            </visual>
+                          </link>
+                        </model>
+                        
+
+            <model name="sidewalk_block_2_3">
+              <static>true</static>
+              <pose>175 125 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_41</name>
+                      <uri>model://house</uri>
+                      <pose>165 115 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_42</name>
+                      <uri>model://house</uri>
+                      <pose>185 115 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_43</name>
+                      <uri>model://house</uri>
+                      <pose>165 135 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_44</name>
+                      <uri>model://house</uri>
+                      <pose>185 135 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_19">
+                  <static>true</static>
+                  <pose>175 107 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_3_0">
+              <static>true</static>
+              <pose>25 175 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_45</name>
+                      <uri>model://house</uri>
+                      <pose>15 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_46</name>
+                      <uri>model://house</uri>
+                      <pose>35 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_47</name>
+                      <uri>model://house</uri>
+                      <pose>15 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_48</name>
+                      <uri>model://house</uri>
+                      <pose>35 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_20">
+                  <static>true</static>
+                  <pose>25 157 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_3_1">
+              <static>true</static>
+              <pose>75 175 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_49</name>
+                      <uri>model://house</uri>
+                      <pose>65 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_50</name>
+                      <uri>model://house</uri>
+                      <pose>85 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_51</name>
+                      <uri>model://house</uri>
+                      <pose>65 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_52</name>
+                      <uri>model://house</uri>
+                      <pose>85 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_21">
+                  <static>true</static>
+                  <pose>75 157 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_3_2">
+              <static>true</static>
+              <pose>125 175 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_53</name>
+                      <uri>model://house</uri>
+                      <pose>115 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_54</name>
+                      <uri>model://house</uri>
+                      <pose>135 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_55</name>
+                      <uri>model://house</uri>
+                      <pose>115 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_56</name>
+                      <uri>model://house</uri>
+                      <pose>135 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_22">
+                  <static>true</static>
+                  <pose>125 157 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+
+            <model name="sidewalk_block_3_3">
+              <static>true</static>
+              <pose>175 175 0.04 0 0 0</pose>
+              <link name="link">
+                <collision name="col">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                </collision>
+                <visual name="pavement">
+                  <geometry><box><size>40 40 0.08</size></box></geometry>
+                  <material>
+                    <ambient>0.72 0.70 0.65 1</ambient>
+                    <diffuse>0.78 0.75 0.70 1</diffuse>
+                    <specular>0.1 0.1 0.1 1</specular>
+                  </material>
+                </visual>
+              </link>
+            </model>
+            
+
+                    <include>
+                      <name>house_57</name>
+                      <uri>model://house</uri>
+                      <pose>165 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_58</name>
+                      <uri>model://house</uri>
+                      <pose>185 165 0.08 0 0 0</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_59</name>
+                      <uri>model://house</uri>
+                      <pose>165 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                    <include>
+                      <name>house_60</name>
+                      <uri>model://house</uri>
+                      <pose>185 185 0.08 0 0 3.14159</pose>
+                    </include>
+                    
+
+                <model name="street_tree_23">
+                  <static>true</static>
+                  <pose>175 157 0.08 0 0 0</pose>
+                  <link name="link">
+                    <visual name="trunk">
+                      <pose>0 0 1.2 0 0 0</pose>
+                      <geometry><cylinder><radius>0.18</radius><length>2.4</length></cylinder></geometry>
+                      <material><ambient>0.35 0.20 0.08 1</ambient></material>
+                    </visual>
+                    <visual name="canopy">
+                      <pose>0 0 2.8 0 0 0</pose>
+                      <geometry><sphere><radius>1.5</radius></sphere></geometry>
+                      <material>
+                        <ambient>0.18 0.55 0.18 1</ambient>
+                        <diffuse>0.22 0.62 0.22 1</diffuse>
+                      </material>
+                    </visual>
+                  </link>
+                </model>
+                
+<include><name>dustbin_1</name><uri>model://dustbin</uri><pose>30.0 -3.5 0 0 0 1.5707</pose></include>
+<include><name>camera_station_1</name><uri>model://ai_camera</uri><pose>31.5 -3.5 0 0 0 0</pose></include>
+<include><name>waste_1</name><uri>model://waste</uri><pose>30.0 -3.5 0.76 0 0 0</pose></include>
+
+        <model name="street_sign_1">
+          <static>true</static>
+          <pose>26.0 -3.5 0 0 0 0</pose>
+          <link name="link">
+            <visual name="post">
+              <pose>0 0 1.2 0 0 0</pose>
+              <geometry><cylinder><radius>0.04</radius><length>2.4</length></cylinder></geometry>
+              <material><ambient>0.3 0.3 0.35 1</ambient></material>
+            </visual>
+            <visual name="sign_board">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.6 0.06 0.4</size></box></geometry>
+              <material>
+                <ambient>0.12 0.35 0.65 1</ambient>
+                <diffuse>0.15 0.45 0.85 1</diffuse>
+              </material>
+            </visual>
+            <visual name="sign_border">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.64 0.05 0.44</size></box></geometry>
+              <material><ambient>0.9 0.9 0.9 1</ambient></material>
+            </visual>
+          </link>
+        </model>
+        
+<include><name>dustbin_2</name><uri>model://dustbin</uri><pose>53.5 30.0 0 0 0 3.14159</pose></include>
+<include><name>camera_station_2</name><uri>model://ai_camera</uri><pose>53.5 31.5 0 0 0 0</pose></include>
+<include><name>waste_2</name><uri>model://waste</uri><pose>53.5 30.0 0.76 0 0 0</pose></include>
+
+        <model name="street_sign_2">
+          <static>true</static>
+          <pose>53.5 26.0 0 0 0 0</pose>
+          <link name="link">
+            <visual name="post">
+              <pose>0 0 1.2 0 0 0</pose>
+              <geometry><cylinder><radius>0.04</radius><length>2.4</length></cylinder></geometry>
+              <material><ambient>0.3 0.3 0.35 1</ambient></material>
+            </visual>
+            <visual name="sign_board">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.6 0.06 0.4</size></box></geometry>
+              <material>
+                <ambient>0.12 0.35 0.65 1</ambient>
+                <diffuse>0.15 0.45 0.85 1</diffuse>
+              </material>
+            </visual>
+            <visual name="sign_border">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.64 0.05 0.44</size></box></geometry>
+              <material><ambient>0.9 0.9 0.9 1</ambient></material>
+            </visual>
+          </link>
+        </model>
+        
+<include><name>dustbin_3</name><uri>model://dustbin</uri><pose>30.0 53.5 0 0 0 -1.5707</pose></include>
+<include><name>camera_station_3</name><uri>model://ai_camera</uri><pose>31.5 53.5 0 0 0 0</pose></include>
+<include><name>waste_3</name><uri>model://waste</uri><pose>30.0 53.5 0.76 0 0 0</pose></include>
+
+        <model name="street_sign_3">
+          <static>true</static>
+          <pose>26.0 53.5 0 0 0 0</pose>
+          <link name="link">
+            <visual name="post">
+              <pose>0 0 1.2 0 0 0</pose>
+              <geometry><cylinder><radius>0.04</radius><length>2.4</length></cylinder></geometry>
+              <material><ambient>0.3 0.3 0.35 1</ambient></material>
+            </visual>
+            <visual name="sign_board">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.6 0.06 0.4</size></box></geometry>
+              <material>
+                <ambient>0.12 0.35 0.65 1</ambient>
+                <diffuse>0.15 0.45 0.85 1</diffuse>
+              </material>
+            </visual>
+            <visual name="sign_border">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.64 0.05 0.44</size></box></geometry>
+              <material><ambient>0.9 0.9 0.9 1</ambient></material>
+            </visual>
+          </link>
+        </model>
+        
+<include><name>dustbin_4</name><uri>model://dustbin</uri><pose>-3.5 30.0 0 0 0 0.0</pose></include>
+<include><name>camera_station_4</name><uri>model://ai_camera</uri><pose>-3.5 31.5 0 0 0 0</pose></include>
+<include><name>waste_4</name><uri>model://waste</uri><pose>-3.5 30.0 0.76 0 0 0</pose></include>
+
+        <model name="street_sign_4">
+          <static>true</static>
+          <pose>-3.5 26.0 0 0 0 0</pose>
+          <link name="link">
+            <visual name="post">
+              <pose>0 0 1.2 0 0 0</pose>
+              <geometry><cylinder><radius>0.04</radius><length>2.4</length></cylinder></geometry>
+              <material><ambient>0.3 0.3 0.35 1</ambient></material>
+            </visual>
+            <visual name="sign_board">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.6 0.06 0.4</size></box></geometry>
+              <material>
+                <ambient>0.12 0.35 0.65 1</ambient>
+                <diffuse>0.15 0.45 0.85 1</diffuse>
+              </material>
+            </visual>
+            <visual name="sign_border">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.64 0.05 0.44</size></box></geometry>
+              <material><ambient>0.9 0.9 0.9 1</ambient></material>
+            </visual>
+          </link>
+        </model>
+        
+<include><name>dustbin_5</name><uri>model://dustbin</uri><pose>80.0 -3.5 0 0 0 1.5707</pose></include>
+<include><name>camera_station_5</name><uri>model://ai_camera</uri><pose>81.5 -3.5 0 0 0 0</pose></include>
+<include><name>waste_5</name><uri>model://waste</uri><pose>80.0 -3.5 0.76 0 0 0</pose></include>
+
+        <model name="street_sign_5">
+          <static>true</static>
+          <pose>76.0 -3.5 0 0 0 0</pose>
+          <link name="link">
+            <visual name="post">
+              <pose>0 0 1.2 0 0 0</pose>
+              <geometry><cylinder><radius>0.04</radius><length>2.4</length></cylinder></geometry>
+              <material><ambient>0.3 0.3 0.35 1</ambient></material>
+            </visual>
+            <visual name="sign_board">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.6 0.06 0.4</size></box></geometry>
+              <material>
+                <ambient>0.12 0.35 0.65 1</ambient>
+                <diffuse>0.15 0.45 0.85 1</diffuse>
+              </material>
+            </visual>
+            <visual name="sign_border">
+              <pose>0 0 2.2 0 0 0</pose>
+              <geometry><box><size>1.64 0.05 0.44</size></box></geometry>
+              <material><ambient>0.9 0.9 0.9 1</ambient></material>
+            </visual>
+          </link>
+        </model>
+        
+
+    <model name="base_shredder_plant">
+      <static>true</static>
+      <pose>4.5 -12.0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="shredder_chassis">
+          <pose>0 0 1.0 0 0 0</pose>
+          <geometry><box><size>2.2 2.0 2.0</size></box></geometry>
+          <material>
+            <ambient>0.2 0.22 0.25 1</ambient>
+            <diffuse>0.25 0.28 0.32 1</diffuse>
+          </material>
+        </visual>
+        <visual name="shredder_hopper">
+          <pose>0 0 2.2 0 0 0</pose>
+          <geometry><cylinder><radius>0.6</radius><length>0.6</length></cylinder></geometry>
+          <material>
+            <ambient>0.85 0.65 0.1 1</ambient>
+            <diffuse>0.92 0.72 0.12 1</diffuse>
+          </material>
+        </visual>
+        <visual name="recycling_sign">
+          <pose>0 -1.02 1.4 0 0 0</pose>
+          <geometry><box><size>1.8 0.04 0.5</size></box></geometry>
+          <material>
+            <ambient>0.15 0.6 0.2 1</ambient>
+            <diffuse>0.18 0.7 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    
+
+    <physics type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+  </world>
+</sdf>
