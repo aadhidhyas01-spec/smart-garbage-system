@@ -16,7 +16,7 @@ struct MissionStep {
 class CivicLensAutonomy : public rclcpp::Node
 {
 public:
-  CivicLensAutonomy() : Node("civiclens_autonomy"), current_mission_step_(0), waiting_for_truck_(false)
+  CivicLensAutonomy() : Node("civiclens_autonomy"), current_mission_step_(0), waiting_for_truck_(false), truck_connected_(false), wait_ticks_(0)
   {
     cmd_pub_ = this->create_publisher<std_msgs::msg::String>("/civiclens/truck_command", 10);
     mission_status_pub_ = this->create_publisher<std_msgs::msg::String>("/civiclens/mission_status", 10);
@@ -24,6 +24,22 @@ public:
     state_sub_ = this->create_subscription<std_msgs::msg::String>(
       "/civiclens/truck_state", 10,
       std::bind(&CivicLensAutonomy::state_callback, this, std::placeholders::_1));
+
+    telemetry_sub_ = this->create_subscription<std_msgs::msg::String>(
+      "/civiclens/truck_telemetry", 10,
+      [this](const std_msgs::msg::String::SharedPtr msg) {
+        if (!truck_connected_) {
+          truck_connected_ = true;
+          RCLCPP_INFO(this->get_logger(), ">> Truck Telemetry Link Verified! Starting Autonomous Mission Fleet.");
+        }
+        auto pos = msg->data.find("\"state\":\"");
+        if (pos != std::string::npos) {
+          auto end_pos = msg->data.find("\"", pos + 9);
+          if (end_pos != std::string::npos) {
+            truck_state_ = msg->data.substr(pos + 9, end_pos - (pos + 9));
+          }
+        }
+      });
 
     build_mission_sequence();
 
@@ -35,9 +51,6 @@ public:
     RCLCPP_INFO(this->get_logger(), "CIVICLENS AI AUTONOMOUS CENTRAL MISSION PLANNER INITIALIZED");
     RCLCPP_INFO(this->get_logger(), "Total Missions: 5 Round Trips (Streets 1 -> 5 <-> Base Station)");
     RCLCPP_INFO(this->get_logger(), "==========================================================");
-
-    // Initial wait for simulation physics to settle
-    rclcpp::sleep_for(std::chrono::seconds(3));
   }
 
 private:
@@ -48,7 +61,7 @@ private:
     // =========================================================================
     add_step("GOTO 0 0 1.57", 1, "Street 1: Greenfield Rd", "DB-01", "Leaving Base towards Intersection");
     add_step("GOTO 30 0 0.0", 1, "Street 1: Greenfield Rd", "DB-01", "Cruising East along Greenfield Road");
-    add_step("GOTO 30 -1.5 -1.57", 1, "Street 1: Greenfield Rd", "DB-01", "Aligning Truck with Smart Dustbin DB-01");
+    add_step("GOTO 30 -1.0 -1.57", 1, "Street 1: Greenfield Rd", "DB-01", "Aligning Truck with Smart Dustbin DB-01");
     add_step("PICKUP 1 BIODEGRADABLE", 1, "Street 1: Greenfield Rd", "DB-01", "Robotic Arm Grasp & Sorting into Bio Compartment");
     add_step("GOTO 30 0 3.14", 1, "Street 1: Greenfield Rd", "DB-01", "Returning to Road Centerline");
     add_step("GOTO 0 0 3.14", 1, "Street 1: Greenfield Rd", "DB-01", "Cruising West towards Central Depot");
@@ -61,7 +74,7 @@ private:
     add_step("GOTO 0 0 1.57", 2, "Street 2: Market Lane", "DB-02", "Leaving Base towards Market Lane");
     add_step("GOTO 50 0 0.0", 2, "Street 2: Market Lane", "DB-02", "Navigating to Market Lane Junction");
     add_step("GOTO 50 30 1.57", 2, "Street 2: Market Lane", "DB-02", "Cruising North along Market Lane");
-    add_step("GOTO 51.5 30 0.0", 2, "Street 2: Market Lane", "DB-02", "Aligning Truck with Smart Dustbin DB-02");
+    add_step("GOTO 51.0 30 0.0", 2, "Street 2: Market Lane", "DB-02", "Aligning Truck with Smart Dustbin DB-02");
     add_step("PICKUP 2 NON_BIODEGRADABLE", 2, "Street 2: Market Lane", "DB-02", "Robotic Arm Grasp & Sorting into Non-Bio Compartment");
     add_step("GOTO 50 30 -1.57", 2, "Street 2: Market Lane", "DB-02", "Returning to Market Lane Centerline");
     add_step("GOTO 50 0 -1.57", 2, "Street 2: Market Lane", "DB-02", "Navigating South to Main Junction");
@@ -75,7 +88,7 @@ private:
     add_step("GOTO 0 0 1.57", 3, "Street 3: Heritage Ave", "DB-03", "Leaving Base towards Heritage Avenue");
     add_step("GOTO 0 50 1.57", 3, "Street 3: Heritage Ave", "DB-03", "Cruising North to Heritage Avenue Junction");
     add_step("GOTO 30 50 0.0", 3, "Street 3: Heritage Ave", "DB-03", "Cruising East along Heritage Avenue");
-    add_step("GOTO 30 51.5 1.57", 3, "Street 3: Heritage Ave", "DB-03", "Aligning Truck with Smart Dustbin DB-03");
+    add_step("GOTO 30 51.0 1.57", 3, "Street 3: Heritage Ave", "DB-03", "Aligning Truck with Smart Dustbin DB-03");
     add_step("PICKUP 3 PLASTIC", 3, "Street 3: Heritage Ave", "DB-03", "Robotic Arm Grasp, Crusher Compaction & Plastic Sorting");
     add_step("GOTO 30 50 3.14", 3, "Street 3: Heritage Ave", "DB-03", "Returning to Heritage Avenue Centerline");
     add_step("GOTO 0 50 3.14", 3, "Street 3: Heritage Ave", "DB-03", "Navigating West to Main Junction");
@@ -88,7 +101,7 @@ private:
     // =========================================================================
     add_step("GOTO 0 0 1.57", 4, "Street 4: Sunrise Blvd", "DB-04", "Leaving Base towards Sunrise Boulevard");
     add_step("GOTO 0 30 1.57", 4, "Street 4: Sunrise Blvd", "DB-04", "Cruising North along Sunrise Boulevard");
-    add_step("GOTO -1.5 30 3.14", 4, "Street 4: Sunrise Blvd", "DB-04", "Aligning Truck with Smart Dustbin DB-04");
+    add_step("GOTO -1.0 30 3.14", 4, "Street 4: Sunrise Blvd", "DB-04", "Aligning Truck with Smart Dustbin DB-04");
     add_step("PICKUP 4 BIODEGRADABLE", 4, "Street 4: Sunrise Blvd", "DB-04", "Robotic Arm Grasp & Sorting into Bio Compartment");
     add_step("GOTO 0 30 -1.57", 4, "Street 4: Sunrise Blvd", "DB-04", "Returning to Sunrise Boulevard Centerline");
     add_step("GOTO 0 0 -1.57", 4, "Street 4: Sunrise Blvd", "DB-04", "Cruising South towards Central Depot");
@@ -100,7 +113,7 @@ private:
     // =========================================================================
     add_step("GOTO 0 0 1.57", 5, "Street 5: Tech Park Way", "DB-05", "Leaving Base towards Tech Park Way");
     add_step("GOTO 80 0 0.0", 5, "Street 5: Tech Park Way", "DB-05", "Cruising East along Tech Park Way");
-    add_step("GOTO 80 -1.5 -1.57", 5, "Street 5: Tech Park Way", "DB-05", "Aligning Truck with Smart Dustbin DB-05");
+    add_step("GOTO 80 -1.0 -1.57", 5, "Street 5: Tech Park Way", "DB-05", "Aligning Truck with Smart Dustbin DB-05");
     add_step("PICKUP 5 PLASTIC", 5, "Street 5: Tech Park Way", "DB-05", "Robotic Arm Grasp, Crusher Compaction & Plastic Sorting");
     add_step("GOTO 80 0 3.14", 5, "Street 5: Tech Park Way", "DB-05", "Returning to Tech Park Way Centerline");
     add_step("GOTO 0 0 3.14", 5, "Street 5: Tech Park Way", "DB-05", "Cruising West towards Central Depot");
@@ -171,6 +184,10 @@ private:
 
   void timer_callback()
   {
+    if (!truck_connected_) {
+      return; // Awaiting live telemetry link from truck before starting mission
+    }
+
     if (!waiting_for_truck_ && current_mission_step_ < mission_sequence_.size()) {
       const auto &step = mission_sequence_[current_mission_step_];
       auto msg = std_msgs::msg::String();
@@ -183,7 +200,22 @@ private:
 
       cmd_pub_->publish(msg);
       waiting_for_truck_ = true;
+      wait_ticks_ = 0;
       publish_mission_status(false);
+    }
+    else if (waiting_for_truck_ && current_mission_step_ < mission_sequence_.size()) {
+      if (truck_state_ == "IDLE") {
+        wait_ticks_++;
+        if (wait_ticks_ > 20) { // 10s idle retry safeguard
+          wait_ticks_ = 0;
+          const auto &step = mission_sequence_[current_mission_step_];
+          auto msg = std_msgs::msg::String();
+          msg.data = step.command;
+          cmd_pub_->publish(msg);
+        }
+      } else {
+        wait_ticks_ = 0; // Active execution in progress, do not interrupt
+      }
     }
     else if (!waiting_for_truck_ && current_mission_step_ >= mission_sequence_.size()) {
       RCLCPP_INFO(this->get_logger(), "==========================================================");
@@ -198,11 +230,15 @@ private:
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr cmd_pub_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr mission_status_pub_;
   rclcpp::Subscription<std_msgs::msg::String>::SharedPtr state_sub_;
+  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr telemetry_sub_;
   rclcpp::TimerBase::SharedPtr timer_;
 
   std::vector<MissionStep> mission_sequence_;
   size_t current_mission_step_;
   bool waiting_for_truck_;
+  bool truck_connected_;
+  std::string truck_state_{"IDLE"};
+  int wait_ticks_;
 };
 
 int main(int argc, char ** argv)

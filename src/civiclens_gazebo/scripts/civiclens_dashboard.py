@@ -3,7 +3,8 @@
 CivicLens AI — Real-Time Operations & Telemetry Web Dashboard
 Hosts a glassmorphic, high-tech web interface on port 8080 with interactive 2D street map,
 live OpenCV AI vision feeds with YOLO detections, 3-compartment truck payload meters,
-plastic crusher status, and real-time mission telemetry.
+plastic crusher status, perception sensors (Ultrasonic, IR, LiDAR, GPS, IMU), powertrain HUD,
+and full interactive system architecture blueprint based on the user's diagram.
 """
 
 import os
@@ -33,7 +34,17 @@ STATE = {
         "arm_step": 0,
         "bio_count": 0,
         "nonbio_count": 0,
-        "plastic_count": 0
+        "plastic_count": 0,
+        "ultrasonic_dist_m": 5.0,
+        "motor_speed_kmh": 0.0,
+        "motor_rpm": 0,
+        "battery_soc_pct": 98.6,
+        "battery_voltage": 74.0,
+        "crusher_status": "IDLE",
+        "crusher_rpm": 0.0,
+        "crusher_torque_nm": 12.0,
+        "lidar_range_m": 18.5,
+        "imu_pitch_deg": 0.15
     },
     "mission": {
         "round": 1,
@@ -79,16 +90,16 @@ HTML_DASHBOARD = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CivicLens AI — Autonomous Waste Management Telemetry Dashboard</title>
+  <title>CivicLens AI — Smart Waste Management &amp; Robotic Manipulation Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-base: #060911;
-      --bg-card: rgba(16, 23, 38, 0.75);
+      --bg-card: rgba(16, 23, 38, 0.85);
       --bg-card-border: rgba(255, 255, 255, 0.08);
-      --bg-card-hover: rgba(23, 34, 56, 0.85);
+      --bg-card-hover: rgba(23, 34, 56, 0.95);
       --neon-bio: #00e676;
       --neon-nonbio: #00b0ff;
       --neon-plastic: #ffd600;
@@ -107,7 +118,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
       padding-bottom: 24px;
     }
     .header {
-      background: rgba(10, 14, 26, 0.85);
+      background: rgba(10, 14, 26, 0.90);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--bg-card-border);
       padding: 16px 28px;
@@ -120,15 +131,15 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     }
     .brand { display: flex; align-items: center; gap: 14px; }
     .brand-logo {
-      width: 44px; height: 44px;
+      width: 46px; height: 46px;
       background: linear-gradient(135deg, #00c6ff, #0072ff);
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
-      font-size: 22px;
+      font-size: 24px;
     }
-    .brand-title h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
-    .brand-title span { color: var(--accent-cyan); font-weight: 400; font-size: 13px; letter-spacing: 1px; }
+    .brand-title h1 { font-size: 19px; font-weight: 800; letter-spacing: 0.5px; }
+    .brand-title span { color: var(--accent-cyan); font-weight: 500; font-size: 12px; letter-spacing: 0.8px; }
     .header-badges { display: flex; gap: 12px; align-items: center; }
     .badge {
       background: rgba(255,255,255,0.05);
@@ -147,11 +158,57 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     }
     @keyframes pulse { 0% { transform: scale(0.9); opacity: 0.8; } 50% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.8; } }
     
+    /* System Architecture Banner */
+    .system-blueprint-banner {
+      background: linear-gradient(90deg, rgba(0, 198, 255, 0.1), rgba(0, 114, 255, 0.05));
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 14px;
+      margin: 18px 28px 0 28px;
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .blueprint-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .blueprint-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .flow-step {
+      background: rgba(255,255,255,0.06);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #fff;
+      display: flex; align-items: center; gap: 5px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .flow-step.active {
+      background: rgba(0, 242, 254, 0.2);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    }
+    .flow-arrow { color: var(--accent-cyan); font-weight: bold; }
+
     .main-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 20px;
-      padding: 24px 28px;
+      padding: 18px 28px;
     }
     @media (max-width: 1200px) { .main-grid { grid-template-columns: 1fr; } }
 
@@ -166,12 +223,12 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     }
     .card:hover { border-color: rgba(0, 242, 254, 0.3); }
     .card-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -180,7 +237,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     /* Canvas Map */
     #cityCanvas {
       width: 100%;
-      height: 380px;
+      height: 360px;
       background: #0b111e;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.06);
@@ -197,13 +254,13 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     }
     .cam-feed {
       width: 100%;
-      height: 280px;
+      height: 260px;
       object-fit: cover;
       display: block;
     }
     .cam-tag {
       position: absolute;
-      top: 12px; left: 12px;
+      top: 10px; left: 10px;
       background: rgba(0,0,0,0.75);
       border: 1px solid var(--neon-bio);
       color: var(--neon-bio);
@@ -216,16 +273,16 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     .cam-selector {
       display: flex;
       gap: 8px;
-      margin-top: 12px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
     .cam-btn {
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--bg-card-border);
       color: var(--text-muted);
-      padding: 6px 12px;
+      padding: 5px 12px;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 11px;
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s;
@@ -240,24 +297,24 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     .mission-banner {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 16px;
     }
     .stat-pill {
       background: rgba(255,255,255,0.03);
       border: 1px solid var(--bg-card-border);
       border-radius: 12px;
-      padding: 14px;
+      padding: 12px 14px;
     }
-    .stat-pill .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
-    .stat-pill .value { font-size: 19px; font-weight: 800; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+    .stat-pill .label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+    .stat-pill .value { font-size: 17px; font-weight: 800; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
 
     /* Compartments */
     .comp-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 10px;
     }
     .comp-box {
       border-radius: 14px;
@@ -282,19 +339,82 @@ HTML_DASHBOARD = """<!DOCTYPE html>
       transition: width 0.4s ease;
     }
 
+    /* Vehicle Perception & Powertrain HUD Grid */
+    .sensor-hud-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .sensor-tile {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sensor-tile .st-head {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sensor-tile .st-val {
+      font-size: 15px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+    .sensor-tile .st-sub {
+      font-size: 10px;
+      color: var(--accent-cyan);
+    }
+
+    /* Interactive Dispatch Buttons */
+    .btn-strip {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .action-btn {
+      background: rgba(0, 198, 255, 0.12);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .action-btn:hover {
+      background: rgba(0, 242, 254, 0.3);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
+    }
+
     /* Event Log Terminal */
     .terminal {
       background: #080c14;
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 12px;
-      padding: 14px;
-      height: 170px;
+      padding: 12px;
+      height: 150px;
       overflow-y: auto;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
     .term-line { display: flex; gap: 10px; line-height: 1.4; }
     .term-time { color: var(--text-muted); flex-shrink: 0; }
@@ -308,22 +428,45 @@ HTML_DASHBOARD = """<!DOCTYPE html>
 
   <header class="header">
     <div class="brand">
-      <div class="brand-logo">♻️</div>
+      <div class="brand-logo">🚛</div>
       <div class="brand-title">
-        <h1>CIVICLENS AI</h1>
-        <span>AUTONOMOUS WASTE FLEET TELEMETRY &amp; SEGREGATION</span>
+        <h1>CIVICLENS AI — ROBOTIC WASTE FLEET</h1>
+        <span>AI VISION • ROBOTIC MANIPULATION • MULTI-COMPARTMENT SORTING</span>
       </div>
     </div>
     <div class="header-badges">
-      <div class="badge"><div class="pulse-dot"></div>FLEET 5G LIVE</div>
+      <div class="badge"><div class="pulse-dot"></div>5G IOT ONLINE</div>
       <div class="badge" id="clock">00:00:00</div>
       <div class="badge" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">ROS 2 + GAZEBO SIM</div>
     </div>
   </header>
 
+  <!-- High-Level Working Flow Banner (Directly from User Diagram) -->
+  <div class="system-blueprint-banner">
+    <div class="blueprint-title">
+      <span>Smart Automated Waste Management Flow Architecture</span>
+      <span style="font-size: 11px; font-weight: 500; color: var(--text-muted);">End-to-End Autonomous Lifecycle</span>
+    </div>
+    <div class="blueprint-flow">
+      <div class="flow-step" id="flow_cam">📷 AI Camera Detection</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" id="flow_ai">🧠 Central AI &amp; Route</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" id="flow_nav">🚛 Truck Autonomous Transit</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" id="flow_dock">📡 Ultrasonic/LiDAR Docking</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" id="flow_arm">🦾 Robotic Arm Dustbin Grasp</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" id="flow_sort">♻️ 3-Way Sort &amp; Crusher</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step" id="flow_cloud">☁️ Cloud Database Record</div>
+    </div>
+  </div>
+
   <main class="main-grid">
     <!-- LEFT COLUMN -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-direction: column; gap: 18px;">
       
       <!-- Top Mission Progress Banner -->
       <div class="card">
@@ -334,7 +477,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
         <div class="mission-banner">
           <div class="stat-pill">
             <div class="label">Target Street</div>
-            <div class="value" id="curStreet" style="color: #fff; font-size: 15px;">Street 1: Greenfield</div>
+            <div class="value" id="curStreet" style="color: #fff; font-size: 14px;">Street 1: Greenfield</div>
           </div>
           <div class="stat-pill">
             <div class="label">Target Bin</div>
@@ -342,7 +485,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
           </div>
           <div class="stat-pill">
             <div class="label">Truck Action</div>
-            <div class="value" id="truckState" style="color: var(--neon-bio); font-size: 16px;">CRUISING</div>
+            <div class="value" id="truckState" style="color: var(--neon-bio); font-size: 15px;">CRUISING</div>
           </div>
           <div class="stat-pill">
             <div class="label">Overall Progress</div>
@@ -363,15 +506,82 @@ HTML_DASHBOARD = """<!DOCTYPE html>
       <div class="card">
         <div class="card-title">
           <span>5-Street Autonomous Fleet Grid Map</span>
-          <span style="font-size: 12px; color: var(--text-muted); font-weight: 400;">50m x 50m Municipal Block</span>
+          <span style="font-size: 12px; color: var(--text-muted); font-weight: 400;">50m x 50m Municipal Zone</span>
         </div>
-        <canvas id="cityCanvas" width="700" height="380"></canvas>
+        <canvas id="cityCanvas" width="700" height="360"></canvas>
+      </div>
+
+      <!-- Vehicle Perception Sensors & Powertrain HUD (from User's Blueprint) -->
+      <div class="card">
+        <div class="card-title">
+          <span>Truck Sensors &amp; Powertrain Telemetry HUD</span>
+          <span style="font-size: 11px; color: var(--neon-bio);">● ALL SUBSYSTEMS NOMINAL</span>
+        </div>
+        <div class="sensor-hud-grid">
+          
+          <!-- Ultrasonic Sensor -->
+          <div class="sensor-tile">
+            <div class="st-head">🔊 Ultrasonic Sonar</div>
+            <div class="st-val" id="hud_ultrasonic">0.82 m</div>
+            <div class="st-sub" id="hud_ultrasonic_sub">Front Bumper Docking</div>
+          </div>
+
+          <!-- Drive Motor -->
+          <div class="sensor-tile">
+            <div class="st-head">⚡ Drive Motor</div>
+            <div class="st-val" id="hud_motor">14.4 km/h</div>
+            <div class="st-sub" id="hud_rpm">850 RPM • Speed Ctrl</div>
+          </div>
+
+          <!-- Battery System -->
+          <div class="sensor-tile">
+            <div class="st-head">🔋 Battery System</div>
+            <div class="st-val" id="hud_battery">98.6 %</div>
+            <div class="st-sub" id="hud_voltage">74.0 V • High-Voltage</div>
+          </div>
+
+          <!-- Plastic Crusher -->
+          <div class="sensor-tile">
+            <div class="st-head">⚙️ Plastic Crusher</div>
+            <div class="st-val" id="hud_crusher" style="color: var(--neon-plastic);">IDLE</div>
+            <div class="st-sub" id="hud_crusher_sub">4.2:1 Ratio • Powder</div>
+          </div>
+
+          <!-- 3D LiDAR -->
+          <div class="sensor-tile">
+            <div class="st-head">📡 3D LiDAR Sensor</div>
+            <div class="st-val" id="hud_lidar">18.5 m</div>
+            <div class="st-sub">360° Obstacle Avoidance</div>
+          </div>
+
+          <!-- IR Proximity -->
+          <div class="sensor-tile">
+            <div class="st-head">🔴 IR Sensor</div>
+            <div class="st-val" style="color: var(--neon-bio);">CLEAR</div>
+            <div class="st-sub">Front Bumper Optical</div>
+          </div>
+
+          <!-- GPS Module -->
+          <div class="sensor-tile">
+            <div class="st-head">📍 GPS Module</div>
+            <div class="st-val">12.9716° N</div>
+            <div class="st-sub">12 Sats Locked • RTK</div>
+          </div>
+
+          <!-- 6-DOF Robotic Arm -->
+          <div class="sensor-tile">
+            <div class="st-head">🦾 Robotic Arm</div>
+            <div class="st-val" id="hud_arm_step" style="color: var(--accent-cyan);">STOWED</div>
+            <div class="st-sub">Object Grasping Claw</div>
+          </div>
+
+        </div>
       </div>
 
       <!-- Fleet Analytics Summary -->
       <div class="card">
         <div class="card-title">Fleet Segregation &amp; Carbon Analytics</div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
           <div class="stat-pill">
             <div class="label">Total Mass Diverted</div>
             <div class="value" id="totalKg" style="color: #fff;">0.0 kg</div>
@@ -385,7 +595,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
             <div class="value" style="color: var(--neon-bio);">76.2%</div>
           </div>
           <div class="stat-pill">
-            <div class="label">CO₂ Footprint Reduced</div>
+            <div class="label">CO₂ Saved</div>
             <div class="value" id="co2Saved" style="color: var(--neon-nonbio);">0.0 kg</div>
           </div>
         </div>
@@ -394,12 +604,12 @@ HTML_DASHBOARD = """<!DOCTYPE html>
     </div>
 
     <!-- RIGHT COLUMN -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; flex-direction: column; gap: 18px;">
 
       <!-- Live AI Camera Feed with YOLO Detection -->
       <div class="card">
         <div class="card-title">
-          <span>Solar-Powered Smart Bin AI Vision</span>
+          <span>AI Vision Camera System</span>
           <span id="activeCamCode" style="color: var(--neon-bio); font-family: 'JetBrains Mono';">CAM: DB-01</span>
         </div>
 
@@ -421,32 +631,48 @@ HTML_DASHBOARD = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- Truck Segregated Compartments -->
+      <!-- Truck Segregated Compartments (Green Leaf, Blue Recycle, Yellow Bottle) -->
       <div class="card">
-        <div class="card-title">Autonomous Truck 3-Compartment Payload</div>
+        <div class="card-title">
+          <span>3 Segregated Compartments &amp; Crusher</span>
+          <span style="font-size: 11px; color: var(--text-muted);">Molded Bed Bins</span>
+        </div>
         <div class="comp-grid">
           
           <div class="comp-box bio">
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">COMPARTMENT 1</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--neon-bio); margin-top: 4px;">BIODEGRADABLE</div>
-            <div style="font-size: 20px; font-family: 'JetBrains Mono'; margin-top: 6px;" id="bioKg">0.0 kg</div>
+            <div style="font-size: 10px; color: var(--text-muted); font-weight: 700;">COMPARTMENT 1 🌿</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--neon-bio); margin-top: 3px;">BIODEGRADABLE</div>
+            <div style="font-size: 19px; font-family: 'JetBrains Mono'; margin-top: 4px;" id="bioKg">0.0 kg</div>
             <div class="comp-meter"><div class="comp-bar" id="bioBar" style="width: 0%; background: var(--neon-bio);"></div></div>
           </div>
 
           <div class="comp-box nonbio">
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">COMPARTMENT 2</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--neon-nonbio); margin-top: 4px;">NON-BIODEGRADABLE</div>
-            <div style="font-size: 20px; font-family: 'JetBrains Mono'; margin-top: 6px;" id="nonbioKg">0.0 kg</div>
+            <div style="font-size: 10px; color: var(--text-muted); font-weight: 700;">COMPARTMENT 2 ♻️</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--neon-nonbio); margin-top: 3px;">NON-BIODEGRADABLE</div>
+            <div style="font-size: 19px; font-family: 'JetBrains Mono'; margin-top: 4px;" id="nonbioKg">0.0 kg</div>
             <div class="comp-meter"><div class="comp-bar" id="nonbioBar" style="width: 0%; background: var(--neon-nonbio);"></div></div>
           </div>
 
           <div class="comp-box plastic">
-            <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">COMPARTMENT 3 + CRUSHER</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--neon-plastic); margin-top: 4px;">PLASTIC POLYMERS</div>
-            <div style="font-size: 20px; font-family: 'JetBrains Mono'; margin-top: 6px;" id="plasticKg">0.0 kg</div>
+            <div style="font-size: 10px; color: var(--text-muted); font-weight: 700;">COMPARTMENT 3 🍾</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--neon-plastic); margin-top: 3px;">PLASTIC + CRUSHER</div>
+            <div style="font-size: 19px; font-family: 'JetBrains Mono'; margin-top: 4px;" id="plasticKg">0.0 kg</div>
             <div class="comp-meter"><div class="comp-bar" id="plasticBar" style="width: 0%; background: var(--neon-plastic);"></div></div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- Manual Mission & Arm Dispatch Controller -->
+      <div class="card">
+        <div class="card-title">Manual Fleet Dispatch &amp; Arm Controls</div>
+        <div class="btn-strip">
+          <button class="action-btn" onclick="sendCmd('GOTO 30 -1.0 -1.57')">📍 Goto DB-01</button>
+          <button class="action-btn" onclick="sendCmd('GOTO 51.0 30 0.0')">📍 Goto DB-02</button>
+          <button class="action-btn" onclick="sendCmd('GOTO 30 51.0 1.57')">📍 Goto DB-03</button>
+          <button class="action-btn" onclick="sendCmd('PICKUP 1 BIODEGRADABLE')">🦾 Pick Bio</button>
+          <button class="action-btn" onclick="sendCmd('PICKUP 3 PLASTIC')">⚙️ Pick &amp; Crush Plastic</button>
+          <button class="action-btn" onclick="sendCmd('UNLOAD')">♻️ Base Unload</button>
         </div>
       </div>
 
@@ -469,6 +695,18 @@ HTML_DASHBOARD = """<!DOCTYPE html>
       selectedCam = val;
       document.querySelectorAll('.cam-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
+    }
+
+    async function sendCmd(cmdStr) {
+      try {
+        await fetch('/api/command', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ command: cmdStr })
+        });
+      } catch (err) {
+        console.error("Failed to send command:", err);
+      }
     }
 
     // Refresh Camera Feed
@@ -504,6 +742,66 @@ HTML_DASHBOARD = """<!DOCTYPE html>
 
         if (data.truck) {
           document.getElementById('truckState').innerText = data.truck.state;
+
+          // Sensors & Powertrain HUD
+          if (data.truck.ultrasonic_dist_m !== undefined) {
+            document.getElementById('hud_ultrasonic').innerText = data.truck.ultrasonic_dist_m.toFixed(2) + ' m';
+            if (data.truck.ultrasonic_dist_m < 1.0) {
+              document.getElementById('hud_ultrasonic_sub').innerText = 'Docked at Dustbin';
+              document.getElementById('hud_ultrasonic').style.color = 'var(--neon-bio)';
+            } else {
+              document.getElementById('hud_ultrasonic_sub').innerText = 'Front Bumper Sonar';
+              document.getElementById('hud_ultrasonic').style.color = '#fff';
+            }
+          }
+
+          if (data.truck.motor_speed_kmh !== undefined) {
+            document.getElementById('hud_motor').innerText = data.truck.motor_speed_kmh.toFixed(1) + ' km/h';
+            document.getElementById('hud_rpm').innerText = Math.round(data.truck.motor_rpm || 0) + ' RPM • Speed Ctrl';
+          }
+
+          if (data.truck.battery_soc_pct !== undefined) {
+            document.getElementById('hud_battery').innerText = data.truck.battery_soc_pct.toFixed(1) + ' %';
+            document.getElementById('hud_voltage').innerText = (data.truck.battery_voltage || 74.0).toFixed(1) + ' V • High-Voltage';
+          }
+
+          if (data.truck.crusher_status) {
+            document.getElementById('hud_crusher').innerText = data.truck.crusher_status;
+            if (data.truck.crusher_status === 'CRUSHING') {
+              document.getElementById('hud_crusher').style.color = 'var(--neon-danger)';
+              document.getElementById('hud_crusher_sub').innerText = 'Active 450 RPM • 125 Nm';
+            } else {
+              document.getElementById('hud_crusher').style.color = 'var(--neon-plastic)';
+              document.getElementById('hud_crusher_sub').innerText = '4.2:1 Ratio • Powder';
+            }
+          }
+
+          if (data.truck.lidar_range_m !== undefined) {
+            document.getElementById('hud_lidar').innerText = data.truck.lidar_range_m.toFixed(1) + ' m';
+          }
+
+          // Arm step label
+          const armSteps = ["APPROACH", "GRASP DUST", "LIFTING", "SORT SWING", "DEPOSITING", "STOWED"];
+          const curStep = data.truck.arm_step || 0;
+          if (data.truck.state === 'PICKING') {
+            document.getElementById('hud_arm_step').innerText = armSteps[curStep] || "ACTIVE";
+          } else {
+            document.getElementById('hud_arm_step').innerText = "STOWED";
+          }
+
+          // Highlight Flow Step in Blueprint
+          document.querySelectorAll('.flow-step').forEach(el => el.classList.remove('active'));
+          if (data.truck.state === 'MOVING') {
+            document.getElementById('flow_nav').classList.add('active');
+          } else if (data.truck.state === 'PICKING') {
+            if (curStep <= 1) document.getElementById('flow_dock').classList.add('active');
+            else if (curStep <= 2) document.getElementById('flow_arm').classList.add('active');
+            else document.getElementById('flow_sort').classList.add('active');
+          } else if (data.truck.state === 'UNLOADING') {
+            document.getElementById('flow_cloud').classList.add('active');
+          } else {
+            document.getElementById('flow_ai').classList.add('active');
+          }
         }
 
         if (data.analytics) {
@@ -554,8 +852,7 @@ HTML_DASHBOARD = """<!DOCTYPE html>
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Coordinate Transform: City is approx -10 <= X <= 90, -15 <= Y <= 60
-      // Map to canvas
+      // Coordinate Transform: City is approx -15 <= X <= 95, -18 <= Y <= 65
       const minX = -15, maxX = 95;
       const minY = -18, maxY = 65;
 
@@ -597,55 +894,156 @@ HTML_DASHBOARD = """<!DOCTYPE html>
       // Base Station
       const basePos = toScreen(0, -10);
       ctx.fillStyle = '#0072ff';
-      ctx.beginPath(); ctx.arc(basePos.x, basePos.y, 16, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(basePos.x, basePos.y, 14, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#00c6ff'; ctx.lineWidth = 2; ctx.stroke();
       ctx.fillStyle = '#fff';
-      ctx.font = 'bold 10px Outfit';
-      ctx.textAlign = 'center';
-      ctx.fillText('BASE', basePos.x, basePos.y + 4);
+      ctx.font = 'bold 10px JetBrains Mono';
+      ctx.fillText('BASE DEPOT', basePos.x - 30, basePos.y + 24);
 
-      // Draw Dustbins
+      // Smart Dustbins
       if (data.bins) {
         data.bins.forEach(b => {
           const bp = toScreen(b.x, b.y);
-          ctx.beginPath();
-          ctx.arc(bp.x, bp.y, 11, 0, Math.PI * 2);
-          
-          if (b.type === 'BIODEGRADABLE') ctx.fillStyle = '#00e676';
-          else if (b.type === 'NON_BIODEGRADABLE') ctx.fillStyle = '#00b0ff';
-          else ctx.fillStyle = '#ffd600';
-          ctx.fill();
+          let col = '#00e676';
+          if (b.type === 'NON_BIODEGRADABLE') col = '#00b0ff';
+          if (b.type === 'PLASTIC') col = '#ffd600';
 
-          ctx.strokeStyle = (b.id === activeBinId) ? '#fff' : 'rgba(255,255,255,0.4)';
-          ctx.lineWidth = (b.id === activeBinId) ? 3 : 1.5;
-          ctx.stroke();
+          ctx.fillStyle = col;
+          ctx.beginPath(); ctx.arc(bp.x, bp.y, 8, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
 
           ctx.fillStyle = '#fff';
           ctx.font = 'bold 9px JetBrains Mono';
-          ctx.fillText(b.code, bp.x, bp.y - 14);
+          ctx.fillText(b.code, bp.x - 12, bp.y - 12);
         });
       }
 
-      // Draw Autonomous Truck
+      // Draw Autonomous Truck (Top-Down Blueprint & Real-Time Compartments)
       if (data.truck) {
         const tp = toScreen(data.truck.x, data.truck.y);
         ctx.save();
         ctx.translate(tp.x, tp.y);
-        ctx.rotate(-data.truck.yaw + Math.PI/2); // Adjust orientation for screen coords
+        ctx.rotate(-data.truck.yaw + Math.PI/2);
 
-        // Truck chassis
-        ctx.fillStyle = '#00f2fe';
+        // Truck chassis & perimeter shadow
+        ctx.fillStyle = '#151c28';
         ctx.shadowColor = '#00f2fe';
         ctx.shadowBlur = 12;
-        ctx.fillRect(-10, -18, 20, 36);
+        ctx.fillRect(-15, -30, 30, 60);
 
-        // Cab
-        ctx.fillStyle = '#111927';
-        ctx.fillRect(-8, -16, 16, 10);
+        // White Cab Shell & Windshield
+        ctx.fillStyle = '#f8fafc';
+        ctx.shadowBlur = 0;
+        ctx.fillRect(-14, -29, 28, 16);
 
-        // Heading arrow
-        ctx.fillStyle = '#ffd600';
+        // Cab Windshield (Dark Tint)
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(-12, -27, 24, 6);
+
+        // Cab Roof Solar Panels (Sapphire)
+        ctx.fillStyle = '#0284c7';
+        ctx.fillRect(-10, -20, 8, 5);
+        ctx.fillRect(2, -20, 8, 5);
+
+        // Emergency Flashing Beacon Bar (Amber)
+        ctx.fillStyle = '#f59e0b';
+        ctx.shadowColor = '#f59e0b';
+        ctx.shadowBlur = (Date.now() % 600 < 300) ? 10 : 2;
+        ctx.fillRect(-7, -22, 14, 2);
+        ctx.shadowBlur = 0;
+
+        // Robotic Arm Base & Turret (Between Cab & Bed)
+        ctx.fillStyle = '#94a3b8';
         ctx.beginPath();
-        ctx.moveTo(0, -22); ctx.lineTo(-5, -16); ctx.lineTo(5, -16); ctx.closePath();
+        ctx.arc(0, -11, 4.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Arm Link Indicator line
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(0, -11);
+        if (data.truck.state === 'PICKING') {
+          // Arm extended forward or back depending on step
+          if (data.truck.arm_step <= 2) {
+            ctx.lineTo(0, -28); // Reaching forward
+          } else {
+            ctx.lineTo(0, 5);  // Swinging backward
+          }
+        } else {
+          ctx.lineTo(0, -5);   // Stowed
+        }
+        ctx.stroke();
+
+        // Bed Side Rails with Compartment Color Trim
+        ctx.fillStyle = '#334155';
+        ctx.fillRect(-15, -6, 2, 36);
+        ctx.fillRect(13, -6, 2, 36);
+
+        // ================= TRUCK COMPARTMENTS (COMPARTMENT-WISE TOP VIEW) =================
+        // Comp 1: Bio / Organic (Emerald Green)
+        const isBioActive = (data.truck.state === 'PICKING' && data.truck.waste_type === 'BIODEGRADABLE');
+        ctx.fillStyle = isBioActive ? '#00ff88' : '#059669';
+        if (isBioActive) { ctx.shadowColor = '#00ff88'; ctx.shadowBlur = 8; }
+        ctx.fillRect(-12, -6, 24, 8);
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 6px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('BIO 🍃', 0, 0);
+
+        // Bulkhead Divider 1
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fillRect(-13, 3, 26, 1.5);
+
+        // Comp 2: Non-Bio / Recyclable (Electric Blue)
+        const isNonBioActive = (data.truck.state === 'PICKING' && data.truck.waste_type === 'NON_BIODEGRADABLE');
+        ctx.fillStyle = isNonBioActive ? '#38bdf8' : '#0284c7';
+        if (isNonBioActive) { ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 8; }
+        ctx.fillRect(-12, 5.5, 24, 8);
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 6px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('RECYCLE ♻', 0, 11.5);
+
+        // Bulkhead Divider 2
+        ctx.fillStyle = '#e2e8f0';
+        ctx.fillRect(-13, 14.5, 26, 1.5);
+
+        // Comp 3: Plastic (Safety Yellow)
+        const isPlasticActive = (data.truck.state === 'PICKING' && data.truck.waste_type === 'PLASTIC');
+        ctx.fillStyle = isPlasticActive ? '#fef08a' : '#eab308';
+        if (isPlasticActive) { ctx.shadowColor = '#facc15'; ctx.shadowBlur = 8; }
+        ctx.fillRect(-12, 17, 24, 7);
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 6px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('PLASTIC', 0, 22.5);
+
+        // Bulkhead Divider 3
+        ctx.fillStyle = '#475569';
+        ctx.fillRect(-13, 24.5, 26, 1.5);
+
+        // Comp 4: Onboard Plastic Crusher (Industrial Orange + Hazard Stripes)
+        ctx.fillStyle = '#ea580c';
+        ctx.fillRect(-12, 26.5, 24, 7.5);
+        // Hazard stripe pattern
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(-10, 26.5, 4, 7.5);
+        ctx.fillRect(-2, 26.5, 4, 7.5);
+        ctx.fillRect(6, 26.5, 4, 7.5);
+        if (data.truck.crusher_status === 'CRUSHING') {
+          ctx.fillStyle = '#ffea00';
+          ctx.font = 'bold 5px Inter, sans-serif';
+          ctx.fillText('⚡ CRUSH', 0, 32);
+        }
+
+        // Heading Direction Arrow (Cyan)
+        ctx.fillStyle = '#00f2fe';
+        ctx.beginPath();
+        ctx.moveTo(0, -36); ctx.lineTo(-6, -30); ctx.lineTo(6, -30); ctx.closePath();
         ctx.fill();
 
         ctx.restore();
@@ -693,7 +1091,7 @@ class CivicLensHTTPHandler(BaseHTTPRequestHandler):
                     self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
                     self.end_headers()
                     self.wfile.write(data)
-                except Exception as e:
+                except Exception:
                     self.send_response(500)
                     self.end_headers()
             else:
@@ -703,8 +1101,33 @@ class CivicLensHTTPHandler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
 
+    def do_POST(self):
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/api/command":
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            try:
+                body = json.loads(post_data.decode('utf-8'))
+                cmd_str = body.get("command", "")
+                if cmd_str and CMD_PUBLISHER:
+                    msg = String()
+                    msg.data = cmd_str
+                    CMD_PUBLISHER.publish(msg)
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    self.wfile.write(b'{"status":"ok"}')
+                    return
+            except Exception:
+                pass
+            self.send_response(400)
+            self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
+
     def log_message(self, format, *args):
-        # Suppress noisy HTTP request logging in ROS terminal
         pass
 
 
@@ -725,7 +1148,7 @@ class DashboardROSNode(Node):
         self.cmd_sub = self.create_subscription(
             String, '/civiclens/truck_command', self.on_command, 10)
 
-        self.get_logger().info("Dashboard ROS 2 Subscriber Bridge Initialized.")
+        self.get_logger().info("Dashboard ROS 2 Subscriber Bridge Initialized with Perception & Powertrain HUD.")
 
     def on_truck_telemetry(self, msg: String):
         try:

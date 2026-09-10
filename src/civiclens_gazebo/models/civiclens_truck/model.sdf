@@ -1,403 +1,965 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <model name="civiclens_truck">
-    <pose>0 0 0.2 0 0 0</pose>
+    <pose>0 0 0.35 0 0 0</pose>
     
     <!-- ================= CHASSIS & VEHICLE BODY ================= -->
     <link name="chassis">
       <kinematic>true</kinematic>
-      <pose>0 0 0.35 0 0 0</pose>
+      <pose>0 0 0.6125 0 0 0</pose>
       <inertial>
-        <mass>350.0</mass>
-        <inertia><ixx>12.0</ixx><iyy>25.0</iyy><izz>25.0</izz></inertia>
+        <mass>420.0</mass>
+        <inertia><ixx>15.0</ixx><iyy>30.0</iyy><izz>30.0</izz></inertia>
       </inertial>
 
-      <!-- Main Lower Chassis Frame (Heavy-Duty Steel Silver/Grey) -->
-      <visual name="chassis_main_frame">
-        <pose>0 0 0.02 0 0 0</pose>
-        <geometry><box><size>2.2 0.95 0.12</size></box></geometry>
+      <!-- Main Heavy-Duty Steel Chassis Rails -->
+      <visual name="chassis_left_rail">
+        <pose>0 0.665 0 0 0 0</pose>
+        <geometry><box><size>4.1125 0.175 0.21</size></box></geometry>
         <material>
-          <ambient>0.28 0.28 0.30 1</ambient>
-          <diffuse>0.35 0.35 0.38 1</diffuse>
-          <specular>0.4 0.4 0.4 1</specular>
+          <ambient>0.20 0.20 0.22 1</ambient>
+          <diffuse>0.25 0.25 0.28 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
         </material>
       </visual>
-
-      <!-- Tubular Outer Space-Frame Cage (Industrial Silver Extrusion) -->
-      <!-- Lower Side Rails -->
-      <visual name="cage_rail_lower_left">
-        <pose>-0.2 0.48 0.05 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.025</radius><length>1.6</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient><specular>0.6 0.6 0.6 1</specular></material>
-      </visual>
-      <visual name="cage_rail_lower_right">
-        <pose>-0.2 -0.48 0.05 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.025</radius><length>1.6</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient><specular>0.6 0.6 0.6 1</specular></material>
-      </visual>
-      <!-- Upper Side Rails -->
-      <visual name="cage_rail_upper_left">
-        <pose>-0.2 0.48 0.38 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.025</radius><length>1.6</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient><specular>0.6 0.6 0.6 1</specular></material>
-      </visual>
-      <visual name="cage_rail_upper_right">
-        <pose>-0.2 -0.48 0.38 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.025</radius><length>1.6</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient><specular>0.6 0.6 0.6 1</specular></material>
-      </visual>
-      <!-- Vertical Cage Struts -->
-      <visual name="cage_strut_l1">
-        <pose>0.6 0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_l2">
-        <pose>0.2 0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_l3">
-        <pose>-0.2 0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_l4">
-        <pose>-0.6 0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_l5">
-        <pose>-1.0 0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-
-      <visual name="cage_strut_r1">
-        <pose>0.6 -0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_r2">
-        <pose>0.2 -0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_r3">
-        <pose>-0.2 -0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_r4">
-        <pose>-0.6 -0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-      <visual name="cage_strut_r5">
-        <pose>-1.0 -0.48 0.22 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.38</length></cylinder></geometry>
-        <material><ambient>0.72 0.72 0.75 1</ambient></material>
-      </visual>
-
-      <!-- ================= FRONT ROBOTIC CAB ================= -->
-      <!-- Front Cab Body (Dark Matte Charcoal) -->
-      <visual name="front_cab_body">
-        <pose>0.82 0 0.24 0 0 0</pose>
-        <geometry><box><size>0.52 0.90 0.40</size></box></geometry>
+      <visual name="chassis_right_rail">
+        <pose>0 -0.665 0 0 0 0</pose>
+        <geometry><box><size>4.1125 0.175 0.21</size></box></geometry>
         <material>
-          <ambient>0.20 0.22 0.25 1</ambient>
-          <diffuse>0.25 0.27 0.30 1</diffuse>
+          <ambient>0.20 0.20 0.22 1</ambient>
+          <diffuse>0.25 0.25 0.28 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      <!-- Crossmembers -->
+      <visual name="chassis_cross_front">
+        <pose>1.575 0 0 0 0 0</pose>
+        <geometry><box><size>0.175 1.33 0.175</size></box></geometry>
+        <material><ambient>0.20 0.20 0.22 1</ambient></material>
+      </visual>
+      <visual name="chassis_cross_mid">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.175 1.33 0.175</size></box></geometry>
+        <material><ambient>0.20 0.20 0.22 1</ambient></material>
+      </visual>
+      <visual name="chassis_cross_rear">
+        <pose>-1.575 0 0 0 0 0</pose>
+        <geometry><box><size>0.175 1.33 0.175</size></box></geometry>
+        <material><ambient>0.20 0.20 0.22 1</ambient></material>
+      </visual>
+
+      <!-- Cargo Bed Deck Base -->
+      <visual name="bed_floor">
+        <pose>-0.42 0 0.1225 0 0 0</pose>
+        <geometry><box><size>2.835 1.645 0.0525</size></box></geometry>
+        <material>
+          <ambient>0.15 0.15 0.17 1</ambient>
+          <diffuse>0.18 0.18 0.20 1</diffuse>
           <specular>0.3 0.3 0.3 1</specular>
         </material>
       </visual>
-      <!-- Heavy-Duty Front Bumper -->
+
+      <!-- Cargo Bed Side Guard Panels (Industrial White & Metallic) -->
+      <visual name="bed_side_left">
+        <pose>-0.42 0.8225 0.385 0 0 0</pose>
+        <geometry><box><size>2.835 0.0525 0.525</size></box></geometry>
+        <material>
+          <ambient>0.88 0.90 0.92 1</ambient>
+          <diffuse>0.92 0.94 0.96 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <visual name="bed_side_right">
+        <pose>-0.42 -0.8225 0.385 0 0 0</pose>
+        <geometry><box><size>2.835 0.0525 0.525</size></box></geometry>
+        <material>
+          <ambient>0.88 0.90 0.92 1</ambient>
+          <diffuse>0.92 0.94 0.96 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <visual name="bed_tailgate">
+        <pose>-1.8375 0 0.385 0 0 0</pose>
+        <geometry><box><size>0.0525 1.645 0.525</size></box></geometry>
+        <material>
+          <ambient>0.88 0.90 0.92 1</ambient>
+          <diffuse>0.92 0.94 0.96 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+
+      <!-- ================= 1. DETAILED AERODYNAMIC CABIN ================= -->
+      <!-- Main Cab Shell (Clean Automotive White) -->
+      <visual name="cab_lower_body">
+        <pose>1.435 0 0.42 0 0 0</pose>
+        <geometry><box><size>1.085 1.61 0.63</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.96 0.97 0.99 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      <!-- Cab Upper Canopy / Roof -->
+      <visual name="cab_upper_roof">
+        <pose>1.295 0 0.945 0 0 0</pose>
+        <geometry><box><size>0.805 1.54 0.42</size></box></geometry>
+        <material>
+          <ambient>0.94 0.95 0.98 1</ambient>
+          <diffuse>0.98 0.98 1.0 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      <!-- Cab Roof Solar Panels (Visible from Top View) -->
+      <visual name="cab_roof_solar_left">
+        <pose>1.26 0.38 1.16 0 0 0</pose>
+        <geometry><box><size>0.56 0.52 0.015</size></box></geometry>
+        <material>
+          <ambient>0.08 0.35 0.75 1</ambient>
+          <diffuse>0.12 0.48 0.92 1</diffuse>
+          <emissive>0.05 0.20 0.45 1</emissive>
+        </material>
+      </visual>
+      <visual name="cab_roof_solar_right">
+        <pose>1.26 -0.38 1.16 0 0 0</pose>
+        <geometry><box><size>0.56 0.52 0.015</size></box></geometry>
+        <material>
+          <ambient>0.08 0.35 0.75 1</ambient>
+          <diffuse>0.12 0.48 0.92 1</diffuse>
+          <emissive>0.05 0.20 0.45 1</emissive>
+        </material>
+      </visual>
+
+      <!-- Raked Front Windshield (Deep Tinted Automotive Glass) -->
+      <visual name="cab_windshield">
+        <pose>1.75 0 0.8575 0 0.42 0</pose>
+        <geometry><box><size>0.035 1.435 0.56</size></box></geometry>
+        <material>
+          <ambient>0.08 0.14 0.22 0.9</ambient>
+          <diffuse>0.10 0.20 0.32 0.9</diffuse>
+          <specular>0.9 0.9 0.95 1</specular>
+        </material>
+      </visual>
+      <!-- Windshield Rubber Trim Frame -->
+      <visual name="windshield_trim">
+        <pose>1.75 0 0.8575 0 0.42 0</pose>
+        <geometry><box><size>0.0438 1.47 0.595</size></box></geometry>
+        <material><ambient>0.08 0.08 0.08 1</ambient></material>
+      </visual>
+
+      <!-- Dual Windshield Wipers -->
+      <visual name="wiper_left">
+        <pose>1.8375 0.35 0.665 0 0.42 -0.25</pose>
+        <geometry><box><size>0.0175 0.42 0.0262</size></box></geometry>
+        <material><ambient>0.05 0.05 0.05 1</ambient></material>
+      </visual>
+      <visual name="wiper_right">
+        <pose>1.8375 -0.35 0.665 0 0.42 -0.25</pose>
+        <geometry><box><size>0.0175 0.42 0.0262</size></box></geometry>
+        <material><ambient>0.05 0.05 0.05 1</ambient></material>
+      </visual>
+
+      <!-- Driver Side Window (Left) -->
+      <visual name="cab_window_left">
+        <pose>1.295 0.7788 0.8575 0 0 0</pose>
+        <geometry><box><size>0.7 0.0262 0.385</size></box></geometry>
+        <material>
+          <ambient>0.08 0.14 0.22 0.9</ambient>
+          <diffuse>0.10 0.20 0.32 0.9</diffuse>
+          <specular>0.9 0.9 0.95 1</specular>
+        </material>
+      </visual>
+      <!-- Passenger Side Window (Right) -->
+      <visual name="cab_window_right">
+        <pose>1.295 -0.7788 0.8575 0 0 0</pose>
+        <geometry><box><size>0.7 0.0262 0.385</size></box></geometry>
+        <material>
+          <ambient>0.08 0.14 0.22 0.9</ambient>
+          <diffuse>0.10 0.20 0.32 0.9</diffuse>
+          <specular>0.9 0.9 0.95 1</specular>
+        </material>
+      </visual>
+
+      <!-- Door Recess Lines & Chrome Door Handles -->
+      <visual name="door_handle_left">
+        <pose>1.085 0.8138 0.49 0 0 0</pose>
+        <geometry><box><size>0.14 0.035 0.035</size></box></geometry>
+        <material><ambient>0.8 0.8 0.8 1</ambient><specular>0.8 0.8 0.8 1</specular></material>
+      </visual>
+      <visual name="door_handle_right">
+        <pose>1.085 -0.8138 0.49 0 0 0</pose>
+        <geometry><box><size>0.14 0.035 0.035</size></box></geometry>
+        <material><ambient>0.8 0.8 0.8 1</ambient><specular>0.8 0.8 0.8 1</specular></material>
+      </visual>
+
+      <!-- Aerodynamic Side Mirrors with Mirror Glass Faces -->
+      <visual name="mirror_arm_left">
+        <pose>1.6625 0.875 0.735 0 0 0.3</pose>
+        <geometry><cylinder><radius>0.021</radius><length>0.21</length></cylinder></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="mirror_housing_left">
+        <pose>1.68 0.98 0.735 0 0 0</pose>
+        <geometry><box><size>0.105 0.0525 0.21</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="mirror_glass_left">
+        <pose>1.6275 0.9887 0.735 0 0 0</pose>
+        <geometry><box><size>0.0088 0.0438 0.1925</size></box></geometry>
+        <material><ambient>0.85 0.90 0.95 1</ambient><specular>1 1 1 1</specular></material>
+      </visual>
+
+      <visual name="mirror_arm_right">
+        <pose>1.6625 -0.875 0.735 0 0 -0.3</pose>
+        <geometry><cylinder><radius>0.021</radius><length>0.21</length></cylinder></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="mirror_housing_right">
+        <pose>1.68 -0.98 0.735 0 0 0</pose>
+        <geometry><box><size>0.105 0.0525 0.21</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="mirror_glass_right">
+        <pose>1.6275 -0.9887 0.735 0 0 0</pose>
+        <geometry><box><size>0.0088 0.0438 0.1925</size></box></geometry>
+        <material><ambient>0.85 0.90 0.95 1</ambient><specular>1 1 1 1</specular></material>
+      </visual>
+
+      <!-- Front Grille with Intake Mesh -->
+      <visual name="front_grille">
+        <pose>1.9863 0 0.35 0 0 0</pose>
+        <geometry><box><size>0.035 1.12 0.315</size></box></geometry>
+        <material>
+          <ambient>0.08 0.08 0.10 1</ambient>
+          <diffuse>0.10 0.10 0.12 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_grille_logo_badge">
+        <pose>2.009 0 0.3675 0 0 0</pose>
+        <geometry><cylinder><radius>0.0613</radius><length>0.0175</length></cylinder></geometry>
+        <material>
+          <ambient>0.0 0.7 0.9 1</ambient>
+          <diffuse>0.0 0.8 1.0 1</diffuse>
+          <emissive>0.0 0.4 0.7 1</emissive>
+        </material>
+      </visual>
+
+      <!-- Heavy-Duty Front Steel Bumper -->
       <visual name="front_bumper">
-        <pose>1.10 0 0.10 0 0 0</pose>
-        <geometry><box><size>0.10 0.96 0.16</size></box></geometry>
-        <material><ambient>0.12 0.12 0.14 1</ambient></material>
-      </visual>
-      <!-- Front Dual LED Headlights -->
-      <visual name="headlight_left">
-        <pose>1.09 0.32 0.24 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.06</radius><length>0.03</length></cylinder></geometry>
-        <material>
-          <ambient>1.0 1.0 1.0 1</ambient>
-          <diffuse>1.0 1.0 1.0 1</diffuse>
-          <emissive>0.95 0.95 0.9 1</emissive>
-        </material>
-      </visual>
-      <visual name="headlight_right">
-        <pose>1.09 -0.32 0.24 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.06</radius><length>0.03</length></cylinder></geometry>
-        <material>
-          <ambient>1.0 1.0 1.0 1</ambient>
-          <diffuse>1.0 1.0 1.0 1</diffuse>
-          <emissive>0.95 0.95 0.9 1</emissive>
-        </material>
-      </visual>
-      <!-- Amber Turn Indicators -->
-      <visual name="indicator_left">
-        <pose>1.09 0.42 0.16 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.03</radius><length>0.02</length></cylinder></geometry>
-        <material>
-          <ambient>0.95 0.55 0.05 1</ambient>
-          <diffuse>1.0 0.6 0.1 1</diffuse>
-          <emissive>0.8 0.45 0.05 1</emissive>
-        </material>
-      </visual>
-      <visual name="indicator_right">
-        <pose>1.09 -0.42 0.16 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.03</radius><length>0.02</length></cylinder></geometry>
-        <material>
-          <ambient>0.95 0.55 0.05 1</ambient>
-          <diffuse>1.0 0.6 0.1 1</diffuse>
-          <emissive>0.8 0.45 0.05 1</emissive>
-        </material>
-      </visual>
-
-      <!-- ================= 4 SEGREGATED WASTE COMPARTMENTS ================= -->
-      <!-- 1. BIODEGRADABLE (Vibrant Green) -->
-      <visual name="comp_biodegradable">
-        <pose>0.40 0 0.22 0 0 0</pose>
-        <geometry><box><size>0.36 0.88 0.34</size></box></geometry>
-        <material>
-          <ambient>0.12 0.50 0.16 1</ambient>
-          <diffuse>0.16 0.62 0.20 1</diffuse>
-          <specular>0.3 0.3 0.3 1</specular>
-        </material>
-      </visual>
-      <!-- Biodegradable Side Label Plaques -->
-      <visual name="label_bio_left">
-        <pose>0.40 0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
-      </visual>
-      <visual name="label_bio_right">
-        <pose>0.40 -0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
-      </visual>
-
-      <!-- 2. NON-BIODEGRADABLE (Vibrant Blue) -->
-      <visual name="comp_non_biodegradable">
-        <pose>0.0 0 0.22 0 0 0</pose>
-        <geometry><box><size>0.36 0.88 0.34</size></box></geometry>
-        <material>
-          <ambient>0.10 0.35 0.75 1</ambient>
-          <diffuse>0.14 0.45 0.85 1</diffuse>
-          <specular>0.3 0.3 0.3 1</specular>
-        </material>
-      </visual>
-      <!-- Non-Bio Side Label Plaques -->
-      <visual name="label_nonbio_left">
-        <pose>0.0 0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
-      </visual>
-      <visual name="label_nonbio_right">
-        <pose>0.0 -0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
-      </visual>
-
-      <!-- 3. PLASTIC (Vibrant Yellow) -->
-      <visual name="comp_plastic">
-        <pose>-0.40 0 0.22 0 0 0</pose>
-        <geometry><box><size>0.36 0.88 0.34</size></box></geometry>
-        <material>
-          <ambient>0.85 0.70 0.10 1</ambient>
-          <diffuse>0.92 0.76 0.12 1</diffuse>
-          <specular>0.3 0.3 0.3 1</specular>
-        </material>
-      </visual>
-      <!-- Plastic Side Label Plaques -->
-      <visual name="label_plastic_left">
-        <pose>-0.40 0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.12 0.12 0.14 1</ambient></material>
-      </visual>
-      <visual name="label_plastic_right">
-        <pose>-0.40 -0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.12 0.12 0.14 1</ambient></material>
-      </visual>
-
-      <!-- 4. PLASTIC CRUSHER (Dark Charcoal Industrial Unit) -->
-      <visual name="comp_crusher">
-        <pose>-0.80 0 0.22 0 0 0</pose>
-        <geometry><box><size>0.36 0.88 0.34</size></box></geometry>
+        <pose>2.0125 0 0.14 0 0 0</pose>
+        <geometry><box><size>0.21 1.715 0.28</size></box></geometry>
         <material>
           <ambient>0.14 0.14 0.16 1</ambient>
           <diffuse>0.18 0.18 0.22 1</diffuse>
           <specular>0.4 0.4 0.4 1</specular>
         </material>
       </visual>
-      <!-- Crusher Hopper Intake Teeth Simulation -->
-      <visual name="crusher_hopper_grill">
-        <pose>-0.80 0 0.40 0 0 0</pose>
-        <geometry><box><size>0.28 0.70 0.04</size></box></geometry>
-        <material><ambient>0.08 0.08 0.08 1</ambient></material>
-      </visual>
-      <!-- Crusher Side Label Plaques -->
-      <visual name="label_crusher_left">
-        <pose>-0.80 0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient></material>
-      </visual>
-      <visual name="label_crusher_right">
-        <pose>-0.80 -0.45 0.22 0 0 0</pose>
-        <geometry><box><size>0.30 0.01 0.14</size></box></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient></material>
-      </visual>
 
-      <!-- ================= UPPER DECK & CIVICLENS AI LIVERY ================= -->
-      <!-- Main Upper Enclosure Deck -->
-      <visual name="upper_deck_housing">
-        <pose>-0.15 0 0.55 0 0 0</pose>
-        <geometry><box><size>1.60 0.82 0.30</size></box></geometry>
+      <!-- Dual High-Intensity Projector LED Headlights -->
+      <visual name="headlight_left">
+        <pose>1.995 0.595 0.42 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0963</radius><length>0.0525</length></cylinder></geometry>
         <material>
-          <ambient>0.90 0.90 0.92 1</ambient>
-          <diffuse>0.94 0.94 0.96 1</diffuse>
-          <specular>0.2 0.2 0.2 1</specular>
-        </material>
-      </visual>
-
-      <!-- CivicLens AI Central Signage Livery Plate (Left Side) -->
-      <visual name="livery_banner_left">
-        <pose>-0.15 0.415 0.55 0 0 0</pose>
-        <geometry><box><size>1.30 0.01 0.20</size></box></geometry>
-        <material>
-          <ambient>0.98 0.98 0.98 1</ambient>
+          <ambient>1.0 1.0 1.0 1</ambient>
           <diffuse>1.0 1.0 1.0 1</diffuse>
+          <emissive>0.98 0.98 0.92 1</emissive>
         </material>
       </visual>
-      <!-- Central Branding Text Band -->
-      <visual name="livery_text_band_left">
-        <pose>-0.15 0.422 0.57 0 0 0</pose>
-        <geometry><box><size>1.0 0.005 0.07</size></box></geometry>
-        <material><ambient>0.12 0.14 0.18 1</ambient><diffuse>0.15 0.18 0.22 1</diffuse></material>
-      </visual>
-      <visual name="livery_subtext_band_left">
-        <pose>-0.15 0.422 0.49 0 0 0</pose>
-        <geometry><box><size>1.15 0.005 0.035</size></box></geometry>
-        <material><ambient>0.18 0.45 0.20 1</ambient><diffuse>0.22 0.55 0.25 1</diffuse></material>
-      </visual>
-
-      <!-- CivicLens AI Central Signage Livery Plate (Right Side) -->
-      <visual name="livery_banner_right">
-        <pose>-0.15 -0.415 0.55 0 0 0</pose>
-        <geometry><box><size>1.30 0.01 0.20</size></box></geometry>
+      <visual name="headlight_right">
+        <pose>1.995 -0.595 0.42 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0963</radius><length>0.0525</length></cylinder></geometry>
         <material>
-          <ambient>0.98 0.98 0.98 1</ambient>
+          <ambient>1.0 1.0 1.0 1</ambient>
           <diffuse>1.0 1.0 1.0 1</diffuse>
+          <emissive>0.98 0.98 0.92 1</emissive>
         </material>
       </visual>
-      <visual name="livery_text_band_right">
-        <pose>-0.15 -0.422 0.57 0 0 0</pose>
-        <geometry><box><size>1.0 0.005 0.07</size></box></geometry>
-        <material><ambient>0.12 0.14 0.18 1</ambient><diffuse>0.15 0.18 0.22 1</diffuse></material>
+
+      <!-- Amber Turn Indicator Lamps -->
+      <visual name="indicator_left">
+        <pose>1.995 0.735 0.42 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0438</radius><length>0.0438</length></cylinder></geometry>
+        <material>
+          <ambient>0.95 0.55 0.05 1</ambient>
+          <diffuse>1.0 0.6 0.1 1</diffuse>
+          <emissive>0.85 0.45 0.05 1</emissive>
+        </material>
       </visual>
-      <visual name="livery_subtext_band_right">
-        <pose>-0.15 -0.422 0.49 0 0 0</pose>
-        <geometry><box><size>1.15 0.005 0.035</size></box></geometry>
-        <material><ambient>0.18 0.45 0.20 1</ambient><diffuse>0.22 0.55 0.25 1</diffuse></material>
+      <visual name="indicator_right">
+        <pose>1.995 -0.735 0.42 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0438</radius><length>0.0438</length></cylinder></geometry>
+        <material>
+          <ambient>0.95 0.55 0.05 1</ambient>
+          <diffuse>1.0 0.6 0.1 1</diffuse>
+          <emissive>0.85 0.45 0.05 1</emissive>
+        </material>
       </visual>
 
-      <!-- Roof Perimeter Safety Guardrails -->
-      <visual name="roof_guardrail_left">
-        <pose>-0.15 0.38 0.74 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.012</radius><length>1.50</length></cylinder></geometry>
-        <material><ambient>0.2 0.2 0.22 1</ambient></material>
+      <!-- Lower Bumper Fog Lamps -->
+      <visual name="fog_light_left">
+        <pose>2.1175 0.63 0.105 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.049</radius><length>0.0262</length></cylinder></geometry>
+        <material><ambient>1 1 0.8 1</ambient><emissive>0.7 0.7 0.5 1</emissive></material>
       </visual>
-      <visual name="roof_guardrail_right">
-        <pose>-0.15 -0.38 0.74 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.012</radius><length>1.50</length></cylinder></geometry>
-        <material><ambient>0.2 0.2 0.22 1</ambient></material>
-      </visual>
-      <visual name="roof_guardrail_back">
-        <pose>-0.90 0 0.74 0 0 1.5707</pose>
-        <geometry><cylinder><radius>0.012</radius><length>0.76</length></cylinder></geometry>
-        <material><ambient>0.2 0.2 0.22 1</ambient></material>
+      <visual name="fog_light_right">
+        <pose>2.1175 -0.63 0.105 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.049</radius><length>0.0262</length></cylinder></geometry>
+        <material><ambient>1 1 0.8 1</ambient><emissive>0.7 0.7 0.5 1</emissive></material>
       </visual>
 
-      <!-- Roof Sensors: 3D LiDAR Sensor Puck -->
-      <visual name="roof_lidar_mast">
-        <pose>0.15 0.22 0.78 0 0 0</pose>
-        <geometry><cylinder><radius>0.025</radius><length>0.16</length></cylinder></geometry>
+      <!-- ================= 2. VEHICLE PERCEPTION SENSORS ================= -->
+      <!-- [A] ULTRASONIC SENSORS (Dual Bumper Transducers - as in User Diagram) -->
+      <visual name="ultrasonic_housing">
+        <pose>2.1175 0 0.175 0 0 0</pose>
+        <geometry><box><size>0.035 0.735 0.0875</size></box></geometry>
+        <material><ambient>0.10 0.10 0.12 1</ambient></material>
+      </visual>
+      <!-- Left Sonar Transducer Eye -->
+      <visual name="ultrasonic_sensor_left">
+        <pose>2.135 0.245 0.175 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0315</radius><length>0.0262</length></cylinder></geometry>
+        <material>
+          <ambient>0.25 0.65 0.95 1</ambient>
+          <diffuse>0.3 0.7 1.0 1</diffuse>
+          <emissive>0.1 0.3 0.6 1</emissive>
+        </material>
+      </visual>
+      <!-- Right Sonar Transducer Eye -->
+      <visual name="ultrasonic_sensor_right">
+        <pose>2.135 -0.245 0.175 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0315</radius><length>0.0262</length></cylinder></geometry>
+        <material>
+          <ambient>0.25 0.65 0.95 1</ambient>
+          <diffuse>0.3 0.7 1.0 1</diffuse>
+          <emissive>0.1 0.3 0.6 1</emissive>
+        </material>
+      </visual>
+
+      <!-- [B] IR SENSOR MODULE (Front Proximity Optical Sensor - as in User Diagram) -->
+      <visual name="ir_sensor_body">
+        <pose>2.1263 0 0.0875 0 0 0</pose>
+        <geometry><box><size>0.035 0.1575 0.0525</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="ir_sensor_lens_1">
+        <pose>2.1438 0.0438 0.0875 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0158</radius><length>0.0175</length></cylinder></geometry>
+        <material><ambient>0.8 0.1 0.1 1</ambient><emissive>0.6 0.05 0.05 1</emissive></material>
+      </visual>
+      <visual name="ir_sensor_lens_2">
+        <pose>2.1438 -0.0438 0.0875 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0158</radius><length>0.0175</length></cylinder></geometry>
+        <material><ambient>0.2 0.2 0.2 1</ambient></material>
+      </visual>
+
+      <!-- [C] 3D LIDAR SENSOR (Cab Roof Spinning Puck - as in User Diagram) -->
+      <visual name="lidar_mounting_pedestal">
+        <pose>1.295 0 1.1725 0 0 0</pose>
+        <geometry><cylinder><radius>0.0788</radius><length>0.07</length></cylinder></geometry>
         <material><ambient>0.25 0.25 0.28 1</ambient></material>
       </visual>
-      <visual name="roof_lidar_puck">
-        <pose>0.15 0.22 0.88 0 0 0</pose>
-        <geometry><cylinder><radius>0.06</radius><length>0.08</length></cylinder></geometry>
+      <visual name="lidar_sensor_body">
+        <pose>1.295 0 1.26 0 0 0</pose>
+        <geometry><cylinder><radius>0.1138</radius><length>0.105</length></cylinder></geometry>
         <material>
           <ambient>0.12 0.12 0.14 1</ambient>
           <diffuse>0.15 0.15 0.18 1</diffuse>
         </material>
       </visual>
-      <visual name="roof_lidar_blue_band">
-        <pose>0.15 0.22 0.88 0 0 0</pose>
-        <geometry><cylinder><radius>0.062</radius><length>0.025</length></cylinder></geometry>
+      <!-- Glowing Blue Laser Scan Ring -->
+      <visual name="lidar_glowing_ring">
+        <pose>1.295 0 1.26 0 0 0</pose>
+        <geometry><cylinder><radius>0.1173</radius><length>0.0315</length></cylinder></geometry>
         <material>
-          <ambient>0.1 0.4 0.9 1</ambient>
-          <emissive>0.2 0.5 1.0 1</emissive>
+          <ambient>0.0 0.6 1.0 1</ambient>
+          <diffuse>0.1 0.7 1.0 1</diffuse>
+          <emissive>0.15 0.75 1.0 1</emissive>
         </material>
       </visual>
-
-      <!-- Roof Sensors: GPS Antenna Dome -->
-      <visual name="roof_gps_dome">
-        <pose>0.15 -0.22 0.74 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.06</length></cylinder></geometry>
-        <material><ambient>0.95 0.95 0.95 1</ambient></material>
+      <visual name="lidar_top_cap">
+        <pose>1.295 0 1.33 0 0 0</pose>
+        <geometry><cylinder><radius>0.0963</radius><length>0.035</length></cylinder></geometry>
+        <material><ambient>0.25 0.25 0.28 1</ambient></material>
       </visual>
 
-      <!-- Roof Dual Communications Whip Antennas -->
-      <visual name="antenna_mast_1">
-        <pose>-0.85 0.32 0.90 0 0 0</pose>
-        <geometry><cylinder><radius>0.008</radius><length>0.36</length></cylinder></geometry>
-        <material><ambient>0.15 0.15 0.15 1</ambient></material>
+      <!-- [D] GPS MODULE & GNSS DOME (Cab Roof Antenna - as in User Diagram) -->
+      <visual name="gps_mast">
+        <pose>1.085 0.4375 1.19 0 0 0</pose>
+        <geometry><cylinder><radius>0.0245</radius><length>0.105</length></cylinder></geometry>
+        <material><ambient>0.3 0.3 0.35 1</ambient></material>
       </visual>
-      <visual name="antenna_mast_2">
-        <pose>-0.85 -0.32 0.90 0 0 0</pose>
-        <geometry><cylinder><radius>0.008</radius><length>0.36</length></cylinder></geometry>
-        <material><ambient>0.15 0.15 0.15 1</ambient></material>
-      </visual>
-
-      <!-- ================= SOLID COLLISION ================= -->
-      <collision name="collision">
-        <geometry><box><size>2.2 0.96 0.70</size></box></geometry>
-      </collision>
-    </link>
-
-    <!-- ================= WHEELS ================= -->
-    <!-- Front Left Wheel -->
-    <link name="front_left_wheel">
-      <kinematic>true</kinematic>
-      <pose>0.68 0.54 0.18 -1.5707 0 0</pose>
-      <collision name="collision">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
-      </collision>
-      <!-- Deep-Tread Rubber Tire -->
-      <visual name="tire">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
+      <visual name="gps_antenna_dome">
+        <pose>1.085 0.4375 1.26 0 0 0</pose>
+        <geometry><cylinder><radius>0.0788</radius><length>0.0525</length></cylinder></geometry>
         <material>
-          <ambient>0.10 0.10 0.12 1</ambient>
-          <diffuse>0.12 0.12 0.14 1</diffuse>
-        </material>
-      </visual>
-      <!-- Silver 6-Spoke Alloy Rim -->
-      <visual name="rim">
-        <pose>0 0 0.01 0 0 0</pose>
-        <geometry><cylinder><radius>0.13</radius><length>0.145</length></cylinder></geometry>
-        <material>
-          <ambient>0.75 0.75 0.78 1</ambient>
-          <diffuse>0.85 0.85 0.88 1</diffuse>
+          <ambient>0.95 0.95 0.98 1</ambient>
+          <diffuse>0.98 0.98 1.0 1</diffuse>
           <specular>0.6 0.6 0.6 1</specular>
         </material>
       </visual>
-      <!-- Center Chrome Hub -->
+
+      <!-- [E] IMU SENSOR MODULE (Inertial Unit on Central Chassis - as in User Diagram) -->
+      <visual name="imu_housing">
+        <pose>0.35 0 0.14 0 0 0</pose>
+        <geometry><box><size>0.105 0.105 0.0438</size></box></geometry>
+        <material>
+          <ambient>0.85 0.35 0.1 1</ambient>
+          <diffuse>0.9 0.4 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Emergency Flashing Safety Beacon Bar -->
+      <visual name="safety_beacon_bar">
+        <pose>1.54 0 1.1725 0 0 0</pose>
+        <geometry><box><size>0.14 0.91 0.0613</size></box></geometry>
+        <material>
+          <ambient>0.98 0.65 0.05 1</ambient>
+          <diffuse>1.0 0.7 0.1 1</diffuse>
+          <emissive>0.7 0.4 0.05 1</emissive>
+        </material>
+      </visual>
+
+      <!-- ================= 3. UNDERCARRIAGE POWERTRAIN & ELECTRONICS ================= -->
+      <!-- [A] DRIVE MOTOR (Electric Traction Motor with Cooling Fins - as in Diagram) -->
+      <visual name="drive_motor_casing">
+        <pose>0 0 -0.07 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.1575</radius><length>0.525</length></cylinder></geometry>
+        <material>
+          <ambient>0.12 0.14 0.18 1</ambient>
+          <diffuse>0.15 0.18 0.22 1</diffuse>
+          <specular>0.4 0.4 0.4 1</specular>
+        </material>
+      </visual>
+      <visual name="drive_motor_fin_1">
+        <pose>0 0 -0.07 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.168</radius><length>0.0262</length></cylinder></geometry>
+        <material><ambient>0.25 0.28 0.32 1</ambient></material>
+      </visual>
+      <visual name="drive_motor_fin_2">
+        <pose>0.14 0 -0.07 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.168</radius><length>0.0262</length></cylinder></geometry>
+        <material><ambient>0.25 0.28 0.32 1</ambient></material>
+      </visual>
+      <visual name="drive_motor_fin_3">
+        <pose>-0.14 0 -0.07 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.168</radius><length>0.0262</length></cylinder></geometry>
+        <material><ambient>0.25 0.28 0.32 1</ambient></material>
+      </visual>
+      <visual name="drive_shaft_front">
+        <pose>0.49 0 -0.07 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0385</radius><length>0.49</length></cylinder></geometry>
+        <material><ambient>0.4 0.4 0.42 1</ambient></material>
+      </visual>
+      <visual name="drive_shaft_rear">
+        <pose>-0.49 0 -0.07 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.0385</radius><length>0.49</length></cylinder></geometry>
+        <material><ambient>0.4 0.4 0.42 1</ambient></material>
+      </visual>
+
+      <!-- [B] BATTERY SYSTEM (High-Voltage Energy Storage Pack - as in Diagram) -->
+      <visual name="battery_enclosure">
+        <pose>-0.665 0 -0.07 0 0 0</pose>
+        <geometry><box><size>0.805 1.19 0.21</size></box></geometry>
+        <material>
+          <ambient>0.10 0.11 0.13 1</ambient>
+          <diffuse>0.13 0.14 0.17 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <!-- Battery Status LED Bar -->
+      <visual name="battery_status_leds">
+        <pose>-0.665 0.6038 -0.07 0 0 0</pose>
+        <geometry><box><size>0.42 0.0175 0.035</size></box></geometry>
+        <material>
+          <ambient>0.0 0.9 0.2 1</ambient>
+          <diffuse>0.0 1.0 0.3 1</diffuse>
+          <emissive>0.0 0.7 0.2 1</emissive>
+        </material>
+      </visual>
+      <!-- High-Voltage Orange Shielded Cables -->
+      <visual name="hv_cable_conduit_1">
+        <pose>-0.28 0.385 -0.0525 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.021</radius><length>0.455</length></cylinder></geometry>
+        <material>
+          <ambient>0.95 0.35 0.0 1</ambient>
+          <diffuse>1.0 0.4 0.0 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- [C] CONTROL ELECTRONIC (Power Distribution Unit - as in Diagram) -->
+      <visual name="control_electronics_box">
+        <pose>0.56 -0.35 -0.07 0 0 0</pose>
+        <geometry><box><size>0.49 0.42 0.175</size></box></geometry>
+        <material>
+          <ambient>0.18 0.22 0.28 1</ambient>
+          <diffuse>0.22 0.26 0.34 1</diffuse>
+        </material>
+      </visual>
+      <!-- Aluminum Cooling Heatsink Fins -->
+      <visual name="control_heatsink">
+        <pose>0.56 -0.35 0.035 0 0 0</pose>
+        <geometry><box><size>0.42 0.35 0.0438</size></box></geometry>
+        <material><ambient>0.6 0.6 0.65 1</ambient></material>
+      </visual>
+
+      <!-- [D] MAIN CONTROLLER (Device Management ECU - as in Diagram) -->
+      <visual name="main_controller_box">
+        <pose>0.56 0.35 -0.07 0 0 0</pose>
+        <geometry><box><size>0.49 0.42 0.175</size></box></geometry>
+        <material>
+          <ambient>0.12 0.14 0.16 1</ambient>
+          <diffuse>0.16 0.18 0.22 1</diffuse>
+        </material>
+      </visual>
+      <visual name="controller_led_panel">
+        <pose>0.56 0.35 0.035 0 0 0</pose>
+        <geometry><box><size>0.245 0.245 0.0262</size></box></geometry>
+        <material>
+          <ambient>0.0 0.8 0.9 1</ambient>
+          <diffuse>0.0 0.9 1.0 1</diffuse>
+          <emissive>0.0 0.5 0.6 1</emissive>
+        </material>
+      </visual>
+
+      <!-- ================= 4. 3 SEGREGATED TRUCK BED BINS (TOP-VIEW COMPARTMENT-WISE) ================= -->
+
+      <!-- INTER-COMPARTMENT BULKHEAD DIVIDERS (Separation Walls) -->
+      <visual name="divider_front">
+        <pose>0.8575 0 0.4725 0 0 0</pose>
+        <geometry><box><size>0.035 1.575 0.665</size></box></geometry>
+        <material><ambient>0.85 0.88 0.92 1</ambient><diffuse>0.92 0.94 0.96 1</diffuse></material>
+      </visual>
+      <visual name="divider_bio_nonbio">
+        <pose>0.175 0 0.4725 0 0 0</pose>
+        <geometry><box><size>0.035 1.575 0.665</size></box></geometry>
+        <material><ambient>0.85 0.88 0.92 1</ambient><diffuse>0.92 0.94 0.96 1</diffuse></material>
+      </visual>
+      <visual name="divider_nonbio_plastic">
+        <pose>-0.525 0 0.4725 0 0 0</pose>
+        <geometry><box><size>0.035 1.575 0.665</size></box></geometry>
+        <material><ambient>0.85 0.88 0.92 1</ambient><diffuse>0.92 0.94 0.96 1</diffuse></material>
+      </visual>
+      <visual name="divider_plastic_crusher">
+        <pose>-1.2075 0 0.4725 0 0 0</pose>
+        <geometry><box><size>0.035 1.575 0.665</size></box></geometry>
+        <material><ambient>0.25 0.26 0.30 1</ambient><diffuse>0.35 0.36 0.40 1</diffuse></material>
+      </visual>
+
+      <!-- Side Guard Color Trim Indicators (Visible from Top & Sides) -->
+      <visual name="side_trim_green_left">
+        <pose>0.525 0.8225 0.656 0 0 0</pose>
+        <geometry><box><size>0.63 0.056 0.026</size></box></geometry>
+        <material><ambient>0.1 0.8 0.25 1</ambient><diffuse>0.15 0.9 0.3 1</diffuse><emissive>0.1 0.4 0.15 1</emissive></material>
+      </visual>
+      <visual name="side_trim_green_right">
+        <pose>0.525 -0.8225 0.656 0 0 0</pose>
+        <geometry><box><size>0.63 0.056 0.026</size></box></geometry>
+        <material><ambient>0.1 0.8 0.25 1</ambient><diffuse>0.15 0.9 0.3 1</diffuse><emissive>0.1 0.4 0.15 1</emissive></material>
+      </visual>
+      <visual name="side_trim_blue_left">
+        <pose>-0.175 0.8225 0.656 0 0 0</pose>
+        <geometry><box><size>0.63 0.056 0.026</size></box></geometry>
+        <material><ambient>0.05 0.55 1.0 1</ambient><diffuse>0.1 0.68 1.0 1</diffuse><emissive>0.05 0.3 0.6 1</emissive></material>
+      </visual>
+      <visual name="side_trim_blue_right">
+        <pose>-0.175 -0.8225 0.656 0 0 0</pose>
+        <geometry><box><size>0.63 0.056 0.026</size></box></geometry>
+        <material><ambient>0.05 0.55 1.0 1</ambient><diffuse>0.1 0.68 1.0 1</diffuse><emissive>0.05 0.3 0.6 1</emissive></material>
+      </visual>
+      <visual name="side_trim_yellow_left">
+        <pose>-0.875 0.8225 0.656 0 0 0</pose>
+        <geometry><box><size>0.63 0.056 0.026</size></box></geometry>
+        <material><ambient>0.95 0.8 0.05 1</ambient><diffuse>1.0 0.88 0.1 1</diffuse><emissive>0.3 0.25 0.05 1</emissive></material>
+      </visual>
+      <visual name="side_trim_yellow_right">
+        <pose>-0.875 -0.8225 0.656 0 0 0</pose>
+        <geometry><box><size>0.63 0.056 0.026</size></box></geometry>
+        <material><ambient>0.95 0.8 0.05 1</ambient><diffuse>1.0 0.88 0.1 1</diffuse><emissive>0.3 0.25 0.05 1</emissive></material>
+      </visual>
+
+      <!-- ============================================== -->
+      <!-- COMPARTMENT 1: BIODEGRADABLE / ORGANIC (Vibrant Green) -->
+      <!-- ============================================== -->
+      <visual name="comp_biodegradable_bin">
+        <pose>0.525 0 0.4375 0 0 0</pose>
+        <geometry><box><size>0.63 1.505 0.63</size></box></geometry>
+        <material>
+          <ambient>0.10 0.68 0.22 1</ambient>
+          <diffuse>0.15 0.82 0.28 1</diffuse>
+          <emissive>0.05 0.22 0.08 1</emissive>
+          <specular>0.4 0.4 0.4 1</specular>
+        </material>
+      </visual>
+      <!-- Top Opening Rim (Vibrant Green with Diffuse & Emissive) -->
+      <visual name="comp_biodegradable_rim">
+        <pose>0.525 0 0.765 0 0 0</pose>
+        <geometry><box><size>0.64 1.52 0.04</size></box></geometry>
+        <material>
+          <ambient>0.12 0.78 0.26 1</ambient>
+          <diffuse>0.18 0.90 0.32 1</diffuse>
+          <emissive>0.08 0.30 0.12 1</emissive>
+        </material>
+      </visual>
+      <!-- Top Hatch Lids (Dual Inward-Folding Green Hopper Lids) -->
+      <visual name="bio_top_lid_left">
+        <pose>0.525 0.40 0.78 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 0.02</size></box></geometry>
+        <material>
+          <ambient>0.08 0.58 0.18 1</ambient>
+          <diffuse>0.12 0.72 0.24 1</diffuse>
+          <emissive>0.04 0.18 0.06 1</emissive>
+        </material>
+      </visual>
+      <visual name="bio_top_lid_right">
+        <pose>0.525 -0.40 0.78 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 0.02</size></box></geometry>
+        <material>
+          <ambient>0.08 0.58 0.18 1</ambient>
+          <diffuse>0.12 0.72 0.24 1</diffuse>
+          <emissive>0.04 0.18 0.06 1</emissive>
+        </material>
+      </visual>
+      <!-- Top View Center BIO Identification Badge Plate -->
+      <visual name="bio_top_badge">
+        <pose>0.525 0 0.785 0 0 0</pose>
+        <geometry><box><size>0.32 0.26 0.015</size></box></geometry>
+        <material><ambient>0.95 0.98 0.95 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.6 0.7 0.6 1</emissive></material>
+      </visual>
+      <!-- Top View Organic Leaf Stem & Blades (Green on White Plate) -->
+      <visual name="bio_top_leaf_stem">
+        <pose>0.525 0 0.795 0 0 0.5</pose>
+        <geometry><box><size>0.20 0.02 0.01</size></box></geometry>
+        <material><ambient>0.1 0.75 0.22 1</ambient><diffuse>0.15 0.88 0.28 1</diffuse><emissive>0.1 0.4 0.15 1</emissive></material>
+      </visual>
+      <visual name="bio_top_leaf_blade">
+        <pose>0.55 0 0.795 0 0 0.3</pose>
+        <geometry><cylinder><radius>0.075</radius><length>0.012</length></cylinder></geometry>
+        <material><ambient>0.1 0.75 0.22 1</ambient><diffuse>0.15 0.88 0.28 1</diffuse><emissive>0.1 0.4 0.15 1</emissive></material>
+      </visual>
+      <!-- Green Bin Embossed Leaf Logo (Left Flank) -->
+      <visual name="leaf_stem_left">
+        <pose>0.525 0.7612 0.4375 0 0.5 0</pose>
+        <geometry><box><size>0.245 0.0088 0.0262</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="leaf_blade_left">
+        <pose>0.56 0.7612 0.49 0 0.3 0</pose>
+        <geometry><cylinder><radius>0.105</radius><length>0.0105</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <!-- Green Bin Embossed Leaf Logo (Right Flank) -->
+      <visual name="leaf_stem_right">
+        <pose>0.525 -0.7612 0.4375 0 0.5 0</pose>
+        <geometry><box><size>0.245 0.0088 0.0262</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="leaf_blade_right">
+        <pose>0.56 -0.7612 0.49 0 0.3 0</pose>
+        <geometry><cylinder><radius>0.105</radius><length>0.0105</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+
+      <!-- ============================================== -->
+      <!-- COMPARTMENT 2: NON-BIODEGRADABLE / RECYCLABLE (Electric Blue) -->
+      <!-- ============================================== -->
+      <visual name="comp_non_biodegradable_bin">
+        <pose>-0.175 0 0.4375 0 0 0</pose>
+        <geometry><box><size>0.63 1.505 0.63</size></box></geometry>
+        <material>
+          <ambient>0.06 0.48 0.95 1</ambient>
+          <diffuse>0.10 0.60 1.0 1</diffuse>
+          <emissive>0.05 0.22 0.48 1</emissive>
+          <specular>0.4 0.4 0.4 1</specular>
+        </material>
+      </visual>
+      <!-- Top Opening Rim (Electric Blue with Diffuse & Emissive) -->
+      <visual name="comp_nonbio_rim">
+        <pose>-0.175 0 0.765 0 0 0</pose>
+        <geometry><box><size>0.64 1.52 0.04</size></box></geometry>
+        <material>
+          <ambient>0.08 0.55 1.0 1</ambient>
+          <diffuse>0.14 0.68 1.0 1</diffuse>
+          <emissive>0.08 0.28 0.60 1</emissive>
+        </material>
+      </visual>
+      <!-- Top Hatch Lids (Dual Inward-Folding Blue Hopper Lids) -->
+      <visual name="nonbio_top_lid_left">
+        <pose>-0.175 0.40 0.78 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 0.02</size></box></geometry>
+        <material>
+          <ambient>0.05 0.38 0.78 1</ambient>
+          <diffuse>0.08 0.48 0.90 1</diffuse>
+          <emissive>0.04 0.18 0.35 1</emissive>
+        </material>
+      </visual>
+      <visual name="nonbio_top_lid_right">
+        <pose>-0.175 -0.40 0.78 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 0.02</size></box></geometry>
+        <material>
+          <ambient>0.05 0.38 0.78 1</ambient>
+          <diffuse>0.08 0.48 0.90 1</diffuse>
+          <emissive>0.04 0.18 0.35 1</emissive>
+        </material>
+      </visual>
+      <!-- Top View Center RECYCLING Identification Badge Plate -->
+      <visual name="nonbio_top_badge">
+        <pose>-0.175 0 0.785 0 0 0</pose>
+        <geometry><box><size>0.32 0.26 0.015</size></box></geometry>
+        <material><ambient>0.95 0.95 0.98 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.6 0.6 0.7 1</emissive></material>
+      </visual>
+      <!-- Top View Recycling Symbol Arrows (Blue/White Mobius Loop) -->
+      <visual name="nonbio_top_arrow1">
+        <pose>-0.175 0 0.795 0 0 0</pose>
+        <geometry><box><size>0.16 0.024 0.01</size></box></geometry>
+        <material><ambient>0.05 0.5 1.0 1</ambient><diffuse>0.1 0.65 1.0 1</diffuse><emissive>0.05 0.3 0.6 1</emissive></material>
+      </visual>
+      <visual name="nonbio_top_arrow2">
+        <pose>-0.23 0 0.795 0 0 -1.05</pose>
+        <geometry><box><size>0.16 0.024 0.01</size></box></geometry>
+        <material><ambient>0.05 0.5 1.0 1</ambient><diffuse>0.1 0.65 1.0 1</diffuse><emissive>0.05 0.3 0.6 1</emissive></material>
+      </visual>
+      <visual name="nonbio_top_arrow3">
+        <pose>-0.12 0 0.795 0 0 1.05</pose>
+        <geometry><box><size>0.16 0.024 0.01</size></box></geometry>
+        <material><ambient>0.05 0.5 1.0 1</ambient><diffuse>0.1 0.65 1.0 1</diffuse><emissive>0.05 0.3 0.6 1</emissive></material>
+      </visual>
+      <!-- Blue Bin Embossed Recycling Arrows (Left Flank) -->
+      <visual name="recycle_arrow1_left">
+        <pose>-0.175 0.7612 0.5425 0 0 0</pose>
+        <geometry><box><size>0.1575 0.0088 0.035</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="recycle_arrow2_left">
+        <pose>-0.245 0.7612 0.4025 0 0 -1.05</pose>
+        <geometry><box><size>0.1575 0.0088 0.035</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="recycle_arrow3_left">
+        <pose>-0.105 0.7612 0.4025 0 0 1.05</pose>
+        <geometry><box><size>0.1575 0.0088 0.035</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <!-- Blue Bin Embossed Recycling Arrows (Right Flank) -->
+      <visual name="recycle_arrow1_right">
+        <pose>-0.175 -0.7612 0.5425 0 0 0</pose>
+        <geometry><box><size>0.1575 0.0088 0.035</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="recycle_arrow2_right">
+        <pose>-0.245 -0.7612 0.4025 0 0 -1.05</pose>
+        <geometry><box><size>0.1575 0.0088 0.035</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="recycle_arrow3_right">
+        <pose>-0.105 -0.7612 0.4025 0 0 1.05</pose>
+        <geometry><box><size>0.1575 0.0088 0.035</size></box></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+
+      <!-- ============================================== -->
+      <!-- COMPARTMENT 3: PLASTIC (High-Visibility Safety Yellow) -->
+      <!-- ============================================== -->
+      <visual name="comp_plastic_bin">
+        <pose>-0.875 0 0.4375 0 0 0</pose>
+        <geometry><box><size>0.63 1.505 0.63</size></box></geometry>
+        <material>
+          <ambient>0.92 0.76 0.06 1</ambient>
+          <diffuse>0.98 0.84 0.08 1</diffuse>
+          <emissive>0.30 0.24 0.04 1</emissive>
+          <specular>0.4 0.4 0.4 1</specular>
+        </material>
+      </visual>
+      <!-- Top Opening Rim (Safety Yellow with Diffuse & Emissive) -->
+      <visual name="comp_plastic_rim">
+        <pose>-0.875 0 0.765 0 0 0</pose>
+        <geometry><box><size>0.64 1.52 0.04</size></box></geometry>
+        <material>
+          <ambient>0.95 0.82 0.08 1</ambient>
+          <diffuse>1.0 0.88 0.12 1</diffuse>
+          <emissive>0.35 0.28 0.05 1</emissive>
+        </material>
+      </visual>
+      <!-- Top Hatch Lids (Dual Inward-Folding Yellow Hopper Lids) -->
+      <visual name="plastic_top_lid_left">
+        <pose>-0.875 0.40 0.78 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 0.02</size></box></geometry>
+        <material>
+          <ambient>0.85 0.68 0.05 1</ambient>
+          <diffuse>0.92 0.75 0.08 1</diffuse>
+          <emissive>0.25 0.18 0.03 1</emissive>
+        </material>
+      </visual>
+      <visual name="plastic_top_lid_right">
+        <pose>-0.875 -0.40 0.78 0 0 0</pose>
+        <geometry><box><size>0.58 0.58 0.02</size></box></geometry>
+        <material>
+          <ambient>0.85 0.68 0.05 1</ambient>
+          <diffuse>0.92 0.75 0.08 1</diffuse>
+          <emissive>0.25 0.18 0.03 1</emissive>
+        </material>
+      </visual>
+      <!-- Top View Center PLASTIC Identification Badge Plate -->
+      <visual name="plastic_top_badge">
+        <pose>-0.875 0 0.785 0 0 0</pose>
+        <geometry><box><size>0.32 0.26 0.015</size></box></geometry>
+        <material><ambient>0.98 0.98 0.95 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.7 0.7 0.6 1</emissive></material>
+      </visual>
+      <!-- Top View Plastic Bottle Silhouette (Charcoal on White Plate) -->
+      <visual name="plastic_top_bottle_body">
+        <pose>-0.875 0 0.795 0 0 0</pose>
+        <geometry><box><size>0.14 0.08 0.01</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient><diffuse>0.20 0.20 0.25 1</diffuse></material>
+      </visual>
+      <visual name="plastic_top_bottle_neck">
+        <pose>-0.96 0 0.795 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 0.01</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient><diffuse>0.20 0.20 0.25 1</diffuse></material>
+      </visual>
+      <!-- Yellow Bin Embossed Plastic Bottle Silhouette (Left Flank) -->
+      <visual name="bottle_body_left">
+        <pose>-0.875 0.7612 0.4025 0 0 0</pose>
+        <geometry><cylinder><radius>0.0665</radius><length>0.175</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="bottle_neck_left">
+        <pose>-0.875 0.7612 0.525 0 0 0</pose>
+        <geometry><cylinder><radius>0.028</radius><length>0.07</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <!-- Yellow Bin Embossed Plastic Bottle Silhouette (Right Flank) -->
+      <visual name="bottle_body_right">
+        <pose>-0.875 -0.7612 0.4025 0 0 0</pose>
+        <geometry><cylinder><radius>0.0665</radius><length>0.175</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+      <visual name="bottle_neck_right">
+        <pose>-0.875 -0.7612 0.525 0 0 0</pose>
+        <geometry><cylinder><radius>0.028</radius><length>0.07</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><emissive>0.5 0.5 0.5 1</emissive></material>
+      </visual>
+
+      <!-- ================= 5. ONBOARD PLASTIC CRUSHER & POWDER COMPACTOR ================= -->
+      <!-- (As shown in Diagram: "CONVERT THE PLASTIC INTO POWDER") -->
+      <visual name="crusher_chamber_body">
+        <pose>-1.54 0 0.4375 0 0 0</pose>
+        <geometry><box><size>0.595 1.505 0.63</size></box></geometry>
+        <material>
+          <ambient>0.20 0.22 0.26 1</ambient>
+          <diffuse>0.28 0.30 0.35 1</diffuse>
+          <specular>0.6 0.6 0.6 1</specular>
+        </material>
+      </visual>
+      <!-- Tapered Safety Hopper Chute (Vibrant Industrial Orange) -->
+      <visual name="crusher_hopper_collar">
+        <pose>-1.54 0 0.77 0 0 0</pose>
+        <geometry><box><size>0.56 1.26 0.0875</size></box></geometry>
+        <material>
+          <ambient>0.98 0.50 0.05 1</ambient>
+          <diffuse>1.0 0.58 0.10 1</diffuse>
+          <emissive>0.35 0.18 0.02 1</emissive>
+        </material>
+      </visual>
+      <!-- Top View Warning Hazard Stripes along Crusher Collar Lip -->
+      <visual name="crusher_top_hazard_1">
+        <pose>-1.54 0.45 0.818 0 0 0</pose>
+        <geometry><box><size>0.52 0.08 0.01</size></box></geometry>
+        <material><ambient>0.08 0.08 0.10 1</ambient><diffuse>0.10 0.10 0.12 1</diffuse></material>
+      </visual>
+      <visual name="crusher_top_hazard_2">
+        <pose>-1.54 0.25 0.818 0 0 0</pose>
+        <geometry><box><size>0.52 0.08 0.01</size></box></geometry>
+        <material><ambient>1 0.85 0.05 1</ambient><diffuse>1 0.9 0.1 1</diffuse><emissive>0.4 0.3 0.05 1</emissive></material>
+      </visual>
+      <visual name="crusher_top_hazard_3">
+        <pose>-1.54 -0.25 0.818 0 0 0</pose>
+        <geometry><box><size>0.52 0.08 0.01</size></box></geometry>
+        <material><ambient>1 0.85 0.05 1</ambient><diffuse>1 0.9 0.1 1</diffuse><emissive>0.4 0.3 0.05 1</emissive></material>
+      </visual>
+      <visual name="crusher_top_hazard_4">
+        <pose>-1.54 -0.45 0.818 0 0 0</pose>
+        <geometry><box><size>0.52 0.08 0.01</size></box></geometry>
+        <material><ambient>0.08 0.08 0.10 1</ambient><diffuse>0.10 0.10 0.12 1</diffuse></material>
+      </visual>
+      <!-- Dual Counter-Rotating Toothed Steel Crushing Rollers -->
+      <visual name="crusher_roller_front">
+        <pose>-1.4525 0 0.7175 0 1.5707 1.5707</pose>
+        <geometry><cylinder><radius>0.0613</radius><length>1.085</length></cylinder></geometry>
+        <material>
+          <ambient>0.75 0.75 0.80 1</ambient>
+          <diffuse>0.90 0.90 0.95 1</diffuse>
+          <specular>0.95 0.95 1.0 1</specular>
+        </material>
+      </visual>
+      <visual name="crusher_roller_rear">
+        <pose>-1.6275 0 0.7175 0 1.5707 1.5707</pose>
+        <geometry><cylinder><radius>0.0613</radius><length>1.085</length></cylinder></geometry>
+        <material>
+          <ambient>0.75 0.75 0.80 1</ambient>
+          <diffuse>0.90 0.90 0.95 1</diffuse>
+          <specular>0.95 0.95 1.0 1</specular>
+        </material>
+      </visual>
+      <!-- Crusher High-Torque Hydraulic Reduction Motor -->
+      <visual name="crusher_drive_motor">
+        <pose>-1.54 0.805 0.56 0 1.5707 1.5707</pose>
+        <geometry><cylinder><radius>0.1313</radius><length>0.1575</length></cylinder></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient><diffuse>0.20 0.20 0.25 1</diffuse></material>
+      </visual>
+      <!-- Crusher Side Warning Hazard Stripes (Yellow / Black) -->
+      <visual name="crusher_hazard_plate_left">
+        <pose>-1.54 0.7612 0.35 0 0 0</pose>
+        <geometry><box><size>0.455 0.0088 0.14</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.05 1</ambient>
+          <diffuse>1.0 0.8 0.1 1</diffuse>
+          <emissive>0.3 0.2 0.02 1</emissive>
+        </material>
+      </visual>
+      <visual name="crusher_hazard_plate_right">
+        <pose>-1.54 -0.7612 0.35 0 0 0</pose>
+        <geometry><box><size>0.455 0.0088 0.14</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.05 1</ambient>
+          <diffuse>1.0 0.8 0.1 1</diffuse>
+          <emissive>0.3 0.2 0.02 1</emissive>
+        </material>
+      </visual>
+
+      <!-- ================= SOLID COLLISION BOUNDS ================= -->
+      <collision name="collision">
+        <geometry><box><size>4.025 1.715 1.3125</size></box></geometry>
+      </collision>
+    </link>
+
+    <!-- ================= WHEELS (SPINNING KINEMATIC WHEELS) ================= -->
+    <!-- Front Left Wheel -->
+    <link name="front_left_wheel">
+      <kinematic>true</kinematic>
+      <pose>1.19 0.945 0.315 -1.5707 0 0</pose>
+      <collision name="collision">
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
+      </collision>
+      <visual name="tire">
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
+        <material><ambient>0.10 0.10 0.12 1</ambient><diffuse>0.12 0.12 0.14 1</diffuse></material>
+      </visual>
+      <visual name="rim">
+        <pose>0 0 0.0175 0 0 0</pose>
+        <geometry><cylinder><radius>0.2275</radius><length>0.2537</length></cylinder></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.85 0.85 0.88 1</diffuse><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+      <visual name="spoke_1">
+        <pose>0 0 0.1225 0 0 0</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
+      </visual>
+      <visual name="spoke_2">
+        <pose>0 0 0.1225 0 0 1.5707</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
+      </visual>
       <visual name="hub">
-        <pose>0 0 0.04 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.15</length></cylinder></geometry>
+        <pose>0 0 0.14 0 0 0</pose>
+        <geometry><cylinder><radius>0.0788</radius><length>0.035</length></cylinder></geometry>
         <material><ambient>0.3 0.3 0.32 1</ambient></material>
       </visual>
     </link>
@@ -408,29 +970,32 @@
     <!-- Front Right Wheel -->
     <link name="front_right_wheel">
       <kinematic>true</kinematic>
-      <pose>0.68 -0.54 0.18 -1.5707 0 0</pose>
+      <pose>1.19 -0.945 0.315 -1.5707 0 0</pose>
       <collision name="collision">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
       </collision>
       <visual name="tire">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
-        <material>
-          <ambient>0.10 0.10 0.12 1</ambient>
-          <diffuse>0.12 0.12 0.14 1</diffuse>
-        </material>
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
+        <material><ambient>0.10 0.10 0.12 1</ambient><diffuse>0.12 0.12 0.14 1</diffuse></material>
       </visual>
       <visual name="rim">
-        <pose>0 0 -0.01 0 0 0</pose>
-        <geometry><cylinder><radius>0.13</radius><length>0.145</length></cylinder></geometry>
-        <material>
-          <ambient>0.75 0.75 0.78 1</ambient>
-          <diffuse>0.85 0.85 0.88 1</diffuse>
-          <specular>0.6 0.6 0.6 1</specular>
-        </material>
+        <pose>0 0 -0.0175 0 0 0</pose>
+        <geometry><cylinder><radius>0.2275</radius><length>0.2537</length></cylinder></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.85 0.85 0.88 1</diffuse><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+      <visual name="spoke_1">
+        <pose>0 0 -0.1225 0 0 0</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
+      </visual>
+      <visual name="spoke_2">
+        <pose>0 0 -0.1225 0 0 1.5707</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
       </visual>
       <visual name="hub">
-        <pose>0 0 -0.04 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.15</length></cylinder></geometry>
+        <pose>0 0 -0.14 0 0 0</pose>
+        <geometry><cylinder><radius>0.0788</radius><length>0.035</length></cylinder></geometry>
         <material><ambient>0.3 0.3 0.32 1</ambient></material>
       </visual>
     </link>
@@ -441,29 +1006,32 @@
     <!-- Rear Left Wheel -->
     <link name="rear_left_wheel">
       <kinematic>true</kinematic>
-      <pose>-0.68 0.54 0.18 -1.5707 0 0</pose>
+      <pose>-1.19 0.945 0.315 -1.5707 0 0</pose>
       <collision name="collision">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
       </collision>
       <visual name="tire">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
-        <material>
-          <ambient>0.10 0.10 0.12 1</ambient>
-          <diffuse>0.12 0.12 0.14 1</diffuse>
-        </material>
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
+        <material><ambient>0.10 0.10 0.12 1</ambient><diffuse>0.12 0.12 0.14 1</diffuse></material>
       </visual>
       <visual name="rim">
-        <pose>0 0 0.01 0 0 0</pose>
-        <geometry><cylinder><radius>0.13</radius><length>0.145</length></cylinder></geometry>
-        <material>
-          <ambient>0.75 0.75 0.78 1</ambient>
-          <diffuse>0.85 0.85 0.88 1</diffuse>
-          <specular>0.6 0.6 0.6 1</specular>
-        </material>
+        <pose>0 0 0.0175 0 0 0</pose>
+        <geometry><cylinder><radius>0.2275</radius><length>0.2537</length></cylinder></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.85 0.85 0.88 1</diffuse><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+      <visual name="spoke_1">
+        <pose>0 0 0.1225 0 0 0</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
+      </visual>
+      <visual name="spoke_2">
+        <pose>0 0 0.1225 0 0 1.5707</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
       </visual>
       <visual name="hub">
-        <pose>0 0 0.04 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.15</length></cylinder></geometry>
+        <pose>0 0 0.14 0 0 0</pose>
+        <geometry><cylinder><radius>0.0788</radius><length>0.035</length></cylinder></geometry>
         <material><ambient>0.3 0.3 0.32 1</ambient></material>
       </visual>
     </link>
@@ -474,29 +1042,32 @@
     <!-- Rear Right Wheel -->
     <link name="rear_right_wheel">
       <kinematic>true</kinematic>
-      <pose>-0.68 -0.54 0.18 -1.5707 0 0</pose>
+      <pose>-1.19 -0.945 0.315 -1.5707 0 0</pose>
       <collision name="collision">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
       </collision>
       <visual name="tire">
-        <geometry><cylinder><radius>0.22</radius><length>0.14</length></cylinder></geometry>
-        <material>
-          <ambient>0.10 0.10 0.12 1</ambient>
-          <diffuse>0.12 0.12 0.14 1</diffuse>
-        </material>
+        <geometry><cylinder><radius>0.385</radius><length>0.245</length></cylinder></geometry>
+        <material><ambient>0.10 0.10 0.12 1</ambient><diffuse>0.12 0.12 0.14 1</diffuse></material>
       </visual>
       <visual name="rim">
-        <pose>0 0 -0.01 0 0 0</pose>
-        <geometry><cylinder><radius>0.13</radius><length>0.145</length></cylinder></geometry>
-        <material>
-          <ambient>0.75 0.75 0.78 1</ambient>
-          <diffuse>0.85 0.85 0.88 1</diffuse>
-          <specular>0.6 0.6 0.6 1</specular>
-        </material>
+        <pose>0 0 -0.0175 0 0 0</pose>
+        <geometry><cylinder><radius>0.2275</radius><length>0.2537</length></cylinder></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient><diffuse>0.85 0.85 0.88 1</diffuse><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+      <visual name="spoke_1">
+        <pose>0 0 -0.1225 0 0 0</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
+      </visual>
+      <visual name="spoke_2">
+        <pose>0 0 -0.1225 0 0 1.5707</pose>
+        <geometry><box><size>0.385 0.0525 0.035</size></box></geometry>
+        <material><ambient>0.75 0.75 0.78 1</ambient></material>
       </visual>
       <visual name="hub">
-        <pose>0 0 -0.04 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.15</length></cylinder></geometry>
+        <pose>0 0 -0.14 0 0 0</pose>
+        <geometry><cylinder><radius>0.0788</radius><length>0.035</length></cylinder></geometry>
         <material><ambient>0.3 0.3 0.32 1</ambient></material>
       </visual>
     </link>
@@ -504,28 +1075,31 @@
       <parent>chassis</parent><child>rear_right_wheel</child><axis><xyz>0 0 1</xyz></axis>
     </joint>
 
-    <!-- ================= 6-DOF INDUSTRIAL ROBOTIC ARM ================= -->
-    <!-- Arm Base Pedestal -->
+    <!-- ================= 6. ARTICULATED ROBOTIC MANIPULATOR ARM ================= -->
+    <!-- (As shown in Diagram: "ROBOTIC ARM: WASTE PICKUP OBJECT GRASPING") -->
+    
+    <!-- Arm Pedestal Mount on Truck Deck Behind Cab -->
     <link name="arm_base">
       <kinematic>true</kinematic>
-      <pose>0.6 0 0.80 0 0 0</pose>
-      <!-- Base Turntable Plate -->
-      <visual name="turntable_plate">
-        <geometry><cylinder><radius>0.18</radius><length>0.08</length></cylinder></geometry>
-        <material>
-          <ambient>0.18 0.18 0.20 1</ambient>
-          <diffuse>0.22 0.22 0.25 1</diffuse>
-          <specular>0.5 0.5 0.5 1</specular>
-        </material>
+      <pose>0.98 0 0.77 0 0 0</pose>
+      <visual name="pedestal_column">
+        <pose>0 0 0.21 0 0 0</pose>
+        <geometry><cylinder><radius>0.21</radius><length>0.42</length></cylinder></geometry>
+        <material><ambient>0.18 0.18 0.20 1</ambient><diffuse>0.22 0.22 0.25 1</diffuse></material>
       </visual>
-      <!-- Turntable Yellow Safety Ring -->
+      <visual name="turntable_plate">
+        <pose>0 0 0.42 0 0 0</pose>
+        <geometry><cylinder><radius>0.28</radius><length>0.0875</length></cylinder></geometry>
+        <material><ambient>0.25 0.25 0.28 1</ambient><diffuse>0.3 0.3 0.35 1</diffuse></material>
+      </visual>
       <visual name="safety_ring">
-        <pose>0 0 0.04 0 0 0</pose>
-        <geometry><cylinder><radius>0.182</radius><length>0.02</length></cylinder></geometry>
-        <material><ambient>0.9 0.7 0.1 1</ambient></material>
+        <pose>0 0 0.4375 0 0 0</pose>
+        <geometry><cylinder><radius>0.2888</radius><length>0.0262</length></cylinder></geometry>
+        <material><ambient>0.95 0.75 0.05 1</ambient><diffuse>1.0 0.8 0.1 1</diffuse></material>
       </visual>
       <collision name="collision">
-        <geometry><cylinder><radius>0.18</radius><length>0.10</length></cylinder></geometry>
+        <pose>0 0 0.21 0 0 0</pose>
+        <geometry><cylinder><radius>0.28</radius><length>0.455</length></cylinder></geometry>
       </collision>
     </link>
     <joint name="arm_base_joint" type="fixed">
@@ -535,107 +1109,106 @@
     <!-- Link 1 (Yaw Rotation Turret) -->
     <link name="arm_link1">
       <kinematic>true</kinematic>
-      <pose>0.6 0 0.96 0 0 0</pose>
-      <!-- Sleek White Robotic Turret Body -->
+      <pose>0.98 0 1.295 0 0 0</pose>
       <visual name="turret_body">
-        <geometry><cylinder><radius>0.13</radius><length>0.22</length></cylinder></geometry>
+        <geometry><cylinder><radius>0.21</radius><length>0.35</length></cylinder></geometry>
         <material>
           <ambient>0.94 0.94 0.96 1</ambient>
           <diffuse>0.98 0.98 0.98 1</diffuse>
-          <specular>0.4 0.4 0.4 1</specular>
+          <specular>0.5 0.5 0.5 1</specular>
         </material>
       </visual>
-      <!-- Black Actuator Collar -->
       <visual name="turret_collar">
-        <pose>0 0 -0.09 0 0 0</pose>
-        <geometry><cylinder><radius>0.14</radius><length>0.04</length></cylinder></geometry>
+        <pose>0 0 -0.14 0 0 0</pose>
+        <geometry><cylinder><radius>0.2275</radius><length>0.07</length></cylinder></geometry>
         <material><ambient>0.15 0.15 0.18 1</ambient></material>
       </visual>
     </link>
     <joint name="arm_joint1" type="revolute">
       <parent>arm_base</parent><child>arm_link1</child>
-      <axis><xyz>0 0 1</xyz><limit><lower>-3.14</lower><upper>3.14</upper></limit></axis>
+      <axis><xyz>0 0 1</xyz><limit><lower>-3.14159</lower><upper>3.14159</upper></limit></axis>
     </joint>
 
     <!-- Link 2 (Shoulder Pitch Boom) -->
     <link name="arm_link2">
       <kinematic>true</kinematic>
-      <pose>0.6 0 1.38 0 0 0</pose>
-      <!-- Shoulder Joint Pivot Knuckle -->
-      <visual name="shoulder_knuckle">
-        <pose>0 0 -0.30 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.10</radius><length>0.18</length></cylinder></geometry>
+      <pose>0.98 0 2.03 0 0 0</pose>
+      <visual name="shoulder_pivot_knuckle">
+        <pose>0 0 -0.49 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.1575</radius><length>0.28</length></cylinder></geometry>
         <material><ambient>0.18 0.18 0.20 1</ambient></material>
       </visual>
-      <!-- Main Boom Arm (White) -->
-      <visual name="boom_arm">
-        <geometry><box><size>0.12 0.14 0.58</size></box></geometry>
+      <visual name="boom_main">
+        <geometry><box><size>0.1925 0.2275 0.98</size></box></geometry>
         <material>
           <ambient>0.94 0.94 0.96 1</ambient>
           <diffuse>0.98 0.98 0.98 1</diffuse>
-          <specular>0.4 0.4 0.4 1</specular>
+          <specular>0.5 0.5 0.5 1</specular>
         </material>
       </visual>
-      <!-- Side Hydraulic / Cable Duct Accent -->
-      <visual name="boom_accent">
-        <pose>0.07 0 0 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.50</length></cylinder></geometry>
+      <!-- Hydraulic Lift Cylinder Visual -->
+      <visual name="hydraulic_cylinder">
+        <pose>0.1225 0 -0.0875 0 0 0</pose>
+        <geometry><cylinder><radius>0.0385</radius><length>0.735</length></cylinder></geometry>
         <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="hydraulic_rod">
+        <pose>0.1225 0 0.245 0 0 0</pose>
+        <geometry><cylinder><radius>0.0245</radius><length>0.42</length></cylinder></geometry>
+        <material><ambient>0.85 0.85 0.9 1</ambient><specular>1 1 1 1</specular></material>
       </visual>
     </link>
     <joint name="arm_joint2" type="revolute">
-      <pose>0 0 -0.3 0 0 0</pose>
+      <pose>0 0 -0.49 0 0 0</pose>
       <parent>arm_link1</parent><child>arm_link2</child>
-      <axis><xyz>0 1 0</xyz><limit><lower>-1.57</lower><upper>1.57</upper></limit></axis>
+      <axis><xyz>0 1 0</xyz><limit><lower>-1.8</lower><upper>1.8</upper></limit></axis>
     </joint>
 
     <!-- Link 3 (Elbow Pitch Forearm) -->
     <link name="arm_link3">
       <kinematic>true</kinematic>
-      <pose>0.6 0 1.98 0 0 0</pose>
-      <!-- Elbow Joint Pivot Knuckle -->
-      <visual name="elbow_knuckle">
-        <pose>0 0 -0.30 0 1.5707 0</pose>
-        <geometry><cylinder><radius>0.08</radius><length>0.16</length></cylinder></geometry>
+      <pose>0.98 0 3.08 0 0 0</pose>
+      <visual name="elbow_pivot_knuckle">
+        <pose>0 0 -0.49 0 1.5707 0</pose>
+        <geometry><cylinder><radius>0.1313</radius><length>0.2625</length></cylinder></geometry>
         <material><ambient>0.18 0.18 0.20 1</ambient></material>
       </visual>
-      <!-- Forearm Arm (White) -->
-      <visual name="forearm">
-        <geometry><box><size>0.10 0.12 0.56</size></box></geometry>
+      <visual name="forearm_main">
+        <geometry><box><size>0.1575 0.1925 0.945</size></box></geometry>
         <material>
           <ambient>0.94 0.94 0.96 1</ambient>
           <diffuse>0.98 0.98 0.98 1</diffuse>
-          <specular>0.4 0.4 0.4 1</specular>
+          <specular>0.5 0.5 0.5 1</specular>
         </material>
       </visual>
     </link>
     <joint name="arm_joint3" type="revolute">
-      <pose>0 0 -0.3 0 0 0</pose>
+      <pose>0 0 -0.49 0 0 0</pose>
       <parent>arm_link2</parent><child>arm_link3</child>
-      <axis><xyz>0 1 0</xyz><limit><lower>-2.0</lower><upper>2.0</upper></limit></axis>
+      <axis><xyz>0 1 0</xyz><limit><lower>-2.2</lower><upper>2.2</upper></limit></axis>
     </joint>
 
-    <!-- Link 4 (Forearm Roll) -->
+    <!-- Link 4 (Forearm Roll Cuff) -->
     <link name="arm_link4">
       <kinematic>true</kinematic>
-      <pose>0.6 0 2.38 0 0 0</pose>
+      <pose>0.98 0 3.745 0 0 0</pose>
       <visual name="wrist_roll_cuff">
-        <geometry><cylinder><radius>0.05</radius><length>0.18</length></cylinder></geometry>
+        <geometry><cylinder><radius>0.0875</radius><length>0.28</length></cylinder></geometry>
         <material><ambient>0.18 0.18 0.20 1</ambient></material>
       </visual>
     </link>
     <joint name="arm_joint4" type="revolute">
-      <pose>0 0 -0.1 0 0 0</pose>
+      <pose>0 0 -0.14 0 0 0</pose>
       <parent>arm_link3</parent><child>arm_link4</child>
-      <axis><xyz>0 0 1</xyz><limit><lower>-3.14</lower><upper>3.14</upper></limit></axis>
+      <axis><xyz>0 0 1</xyz><limit><lower>-3.14159</lower><upper>3.14159</upper></limit></axis>
     </joint>
 
     <!-- Link 5 (Wrist Pitch Knuckle) -->
     <link name="arm_link5">
       <kinematic>true</kinematic>
-      <pose>0.6 0 2.58 0 0 0</pose>
+      <pose>0.98 0 4.06 0 0 0</pose>
       <visual name="wrist_pitch_knuckle">
-        <geometry><box><size>0.08 0.08 0.16</size></box></geometry>
+        <geometry><box><size>0.1313 0.1313 0.2625</size></box></geometry>
         <material>
           <ambient>0.94 0.94 0.96 1</ambient>
           <diffuse>0.98 0.98 0.98 1</diffuse>
@@ -643,72 +1216,86 @@
       </visual>
     </link>
     <joint name="arm_joint5" type="revolute">
-      <pose>0 0 -0.1 0 0 0</pose>
+      <pose>0 0 -0.14 0 0 0</pose>
       <parent>arm_link4</parent><child>arm_link5</child>
-      <axis><xyz>0 1 0</xyz><limit><lower>-1.57</lower><upper>1.57</upper></limit></axis>
+      <axis><xyz>0 1 0</xyz><limit><lower>-1.8</lower><upper>1.8</upper></limit></axis>
     </joint>
 
-    <!-- Link 6 (End-Effector Wrist & Mechanical Gripper Claw) -->
+    <!-- Link 6 (End-Effector Wrist & Mechanical Claw Gripper) -->
     <link name="arm_link6">
       <kinematic>true</kinematic>
-      <pose>0.6 0 2.78 0 0 0</pose>
+      <pose>0.98 0 4.41 0 0 0</pose>
       
-      <!-- Tool Flange Mount Plate -->
+      <!-- Tool Mounting Flange -->
       <visual name="gripper_flange">
-        <pose>0 0 -0.06 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry>
+        <pose>0 0 -0.0875 0 0 0</pose>
+        <geometry><cylinder><radius>0.084</radius><length>0.0613</length></cylinder></geometry>
         <material><ambient>0.2 0.2 0.22 1</ambient></material>
       </visual>
 
       <!-- Gripper Palm Body -->
       <visual name="gripper_palm">
-        <pose>0 0 -0.01 0 0 0</pose>
-        <geometry><box><size>0.12 0.16 0.06</size></box></geometry>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><box><size>0.1925 0.2625 0.105</size></box></geometry>
         <material>
           <ambient>0.94 0.94 0.96 1</ambient>
           <diffuse>0.98 0.98 0.98 1</diffuse>
-          <specular>0.4 0.4 0.4 1</specular>
+          <specular>0.5 0.5 0.5 1</specular>
         </material>
       </visual>
 
-      <!-- Left Gripper Finger -->
+      <!-- Left Articulated Gripper Finger -->
       <visual name="finger_left">
-        <pose>0 0.09 0.07 0 0.25 0</pose>
-        <geometry><box><size>0.035 0.025 0.12</size></box></geometry>
+        <pose>0 0.1488 0.1313 0 0.25 0</pose>
+        <geometry><box><size>0.056 0.042 0.2275</size></box></geometry>
         <material><ambient>0.15 0.15 0.18 1</ambient></material>
       </visual>
-      <!-- Left Rubber Friction Pad -->
+      <!-- Left High-Grip Rubber Friction Pad -->
       <visual name="finger_pad_left">
-        <pose>0 0.076 0.08 0 0.25 0</pose>
-        <geometry><box><size>0.028 0.008 0.08</size></box></geometry>
-        <material><ambient>0.9 0.5 0.1 1</ambient></material> <!-- Orange Grip Pad -->
+        <pose>0 0.126 0.1488 0 0.25 0</pose>
+        <geometry><box><size>0.0438 0.014 0.1575</size></box></geometry>
+        <material>
+          <ambient>0.95 0.45 0.05 1</ambient>
+          <diffuse>1.0 0.5 0.05 1</diffuse>
+        </material>
       </visual>
 
-      <!-- Right Gripper Finger -->
+      <!-- Right Articulated Gripper Finger -->
       <visual name="finger_right">
-        <pose>0 -0.09 0.07 0 -0.25 0</pose>
-        <geometry><box><size>0.035 0.025 0.12</size></box></geometry>
+        <pose>0 -0.1488 0.1313 0 -0.25 0</pose>
+        <geometry><box><size>0.056 0.042 0.2275</size></box></geometry>
         <material><ambient>0.15 0.15 0.18 1</ambient></material>
       </visual>
-      <!-- Right Rubber Friction Pad -->
+      <!-- Right High-Grip Rubber Friction Pad -->
       <visual name="finger_pad_right">
-        <pose>0 -0.076 0.08 0 -0.25 0</pose>
-        <geometry><box><size>0.028 0.008 0.08</size></box></geometry>
-        <material><ambient>0.9 0.5 0.1 1</ambient></material> <!-- Orange Grip Pad -->
+        <pose>0 -0.126 0.1488 0 -0.25 0</pose>
+        <geometry><box><size>0.0438 0.014 0.1575</size></box></geometry>
+        <material>
+          <ambient>0.95 0.45 0.05 1</ambient>
+          <diffuse>1.0 0.5 0.05 1</diffuse>
+        </material>
       </visual>
 
-      <!-- Center Claw Stabilizer Finger -->
+      <!-- Center Claw Opposable Stabilizer Finger -->
       <visual name="finger_center">
-        <pose>0.07 0 0.07 0.25 0 0</pose>
-        <geometry><box><size>0.025 0.035 0.12</size></box></geometry>
+        <pose>0.1138 0 0.1313 0.25 0 0</pose>
+        <geometry><box><size>0.042 0.056 0.2275</size></box></geometry>
         <material><ambient>0.15 0.15 0.18 1</ambient></material>
+      </visual>
+      <visual name="finger_pad_center">
+        <pose>0.0945 0 0.1488 0.25 0 0</pose>
+        <geometry><box><size>0.014 0.0438 0.1575</size></box></geometry>
+        <material>
+          <ambient>0.95 0.45 0.05 1</ambient>
+          <diffuse>1.0 0.5 0.05 1</diffuse>
+        </material>
       </visual>
 
     </link>
     <joint name="arm_joint6" type="revolute">
       <pose>0 0 0 0 0 0</pose>
       <parent>arm_link5</parent><child>arm_link6</child>
-      <axis><xyz>0 0 1</xyz><limit><lower>-3.14</lower><upper>3.14</upper></limit></axis>
+      <axis><xyz>0 0 1</xyz><limit><lower>-3.14159</lower><upper>3.14159</upper></limit></axis>
     </joint>
 
     <plugin filename="libtruck_gazebo_plugin.so" name="civiclens::TruckGazeboPlugin">

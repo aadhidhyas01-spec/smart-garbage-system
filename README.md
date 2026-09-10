@@ -56,13 +56,25 @@ Compartment 1 (Bio)                      Compartment 2 (Non-Bio)                
 ## 🚛 Key Features
 
 - **Autonomous Waypoint Navigation**: Executes round-trip collection routes across residential streets (`DB-01` through `DB-05`).
-- **6-DOF Robotic Arm**: Turret base, shoulder pitch, elbow pitch, forearm roll, wrist pitch, and mechanical gripper claw for physical bin handling.
+- **High-Fidelity Vehicle Design & Cab**: Aerodynamic cab with tinted windshield, side windows, doors, side mirrors, grille, dual LED headlights, indicators, and heavy-duty bumper.
+- **Mounted Perception Sensors**:
+  - **Ultrasonic Sensors**: Dual front bumper sonar transducers for close-range docking (< 1.0 m).
+  - **IR Proximity Sensor**: Infrared edge detection on the front bumper.
+  - **3D LiDAR Sensor**: Cab roof spinning puck with active 360° laser scanning.
+  - **GPS Module**: Cab roof GNSS antenna dome & RTK positioning.
+  - **IMU Sensor**: Central chassis inertial measurement unit monitoring orientation and tilt.
+- **Undercarriage Powertrain & Electronics**:
+  - **Electric Drive Motor**: High-torque traction motor with radial cooling fins and active speed control.
+  - **Battery System**: High-voltage lithium energy storage pack with orange shielded conduits.
+  - **Control Electronics**: Power distribution unit with aluminum heatsink fins.
+  - **Main Controller**: Vehicle ECU device management unit.
+- **6-DOF Robotic Arm**: Turret base, shoulder pitch, elbow pitch, forearm roll, wrist pitch, and mechanical gripper claw with rubber friction pads for physical bin handling and continuous waste bag tracking during pickup.
 - **Tri-Compartment Segregated Storage**:
-  - **Compartment 1 (Green)**: Biodegradable & compost refuse.
-  - **Compartment 2 (Cyan)**: Non-biodegradable, metals, and dry recyclables.
-  - **Compartment 3 (Yellow)**: Compacted plastic polymers.
-- **Onboard Plastic Crusher**: High-torque mechanical teeth achieving $4.2\times$ volumetric reduction ($76.2\%$ volume saved).
-- **Live Telemetry & Web Operations Dashboard**: Real-time fleet mapping, YOLO vision bounding boxes, compartment fill gauges, and event logs served at `http://localhost:8080`.
+  - **Compartment 1 (Green)**: Biodegradable & organic waste with embossed **Leaf** emblem.
+  - **Compartment 2 (Blue)**: Non-biodegradable, metals, and dry recyclables with embossed **Recycling 3-arrow** emblem.
+  - **Compartment 3 (Yellow)**: Compacted plastic polymers with embossed **Bottle** emblem.
+- **Onboard Plastic Crusher**: Dual counter-rotating toothed steel rollers achieving $4.2\times$ volumetric reduction ($76.2\%$ volume saved).
+- **Live Telemetry & Web Operations Dashboard**: Real-time fleet mapping, YOLO vision bounding boxes, sensor telemetry HUD (ultrasonic, motor RPM, battery %, crusher torque), compartment fill gauges, and event logs served at `http://localhost:8080`.
 
 ---
 

@@ -41,7 +41,7 @@
     <include>
       <name>civiclens_truck</name>
       <uri>model://civiclens_truck</uri>
-      <pose>0 -10 0.2 0 0 1.57</pose>
+      <pose>0 -10 0.07 0 0 1.57</pose>
     </include>
     
 
