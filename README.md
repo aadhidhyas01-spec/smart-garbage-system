@@ -5,6 +5,29 @@ An autonomous, multi-compartment municipal waste management robotic truck simula
 ---
 
 ## 🌟 Overview
+## Runtime compatibility — read before building
+
+This repository currently targets the **ROS 2 Lyrical + modern Gazebo Sim (gz-* APIs) toolchain**. The launcher intentionally sources /opt/ros/lyrical/setup.bash; do not change that path to Humble as a quick fix.
+
+The source uses the gz-sim, gz-plugin, gz-math, gz-transport and gz-msgs CMake packages. The standard ROS 2 Humble pairing is Gazebo Fortress, so this package has **not been ported or verified on a Humble/Fortress setup**. A Humble port requires adapting the Gazebo C++ plugin and CMake dependencies, followed by a clean build and simulation test.
+
+See the [Gazebo / ROS compatibility guide](https://github.com/gazebosim/docs/blob/master/common/ros_installation.md) before choosing the matching ROS and Gazebo versions.
+
+### Build on the supported toolchain
+
+```bash
+source /opt/ros/lyrical/setup.bash
+cd /path/to/smart-garbage-system
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --symlink-install
+source install/setup.bash
+./run.sh
+```
+
+The web dashboard is intended to run at http://localhost:8080. This workflow is documented but has not been executed against a live Gazebo installation in this review.
+
+---
+
 
 The **AI Robotic Truck** (`civiclens_gazebo`) is designed for urban residential neighborhoods. It autonomously detects overflowing dustbins using solar-powered AI camera IoT stations, classifies waste types using computer vision, navigates a 5-street municipal grid, utilizes a 6-DOF robotic arm for automated bin retrieval, segregates refuse into dedicated compartments, crushes plastic polymers with an onboard crusher, and discharges payload at a Central Base Station.
 
