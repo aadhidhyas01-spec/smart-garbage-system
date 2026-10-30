@@ -22,6 +22,9 @@ if [ -f "/opt/ros/lyrical/setup.bash" ]; then
     echo "[✓] Sourced ROS 2 Lyrical"
 else
     echo "[✗] ROS 2 Lyrical not found at /opt/ros/lyrical"
+    echo "    This repository currently uses modern gz-* Gazebo APIs."
+    echo "    ROS 2 Humble normally uses Gazebo Fortress; a Humble port is still required."
+    echo "    Read the Runtime compatibility section in README.md before changing ROS_DISTRO."
     exit 1
 fi
 
