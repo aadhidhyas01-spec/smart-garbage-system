@@ -14,6 +14,21 @@
   <depend>geometry_msgs</depend>
   <depend>ros_gz_sim</depend>
   <depend>ros_gz_bridge</depend>
+  <depend>gz-sim</depend>
+  <depend>gz-plugin</depend>
+  <depend>gz-math</depend>
+  <depend>gz-transport</depend>
+  <depend>gz-msgs</depend>
+
+  <!-- Python launch files and runtime nodes -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-fastapi</exec_depend>
+  <exec_depend>python3-uvicorn</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
